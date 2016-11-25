@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RSCHackathon</string>
+    <string name="search">search</string>
 </resources>

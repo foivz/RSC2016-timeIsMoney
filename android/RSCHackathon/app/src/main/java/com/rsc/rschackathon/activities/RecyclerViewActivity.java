@@ -95,19 +95,19 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
 
         }
         else if(position == 2){
-            Book book = Book.findById(Book.class, 5);
+            Book book = Book.findById(Book.class, 6);
             Toast.makeText(this, book.getTitle(), Toast.LENGTH_SHORT).show();
             //List<Note> notes = Note.findWithQuery(Note.class, "Select * from Note where name = ?", "satya");
 
         }
         else if(position == 3){
-            Book book = Book.findById(Book.class, 5);
+            Book book = Book.findById(Book.class, 6);
             book.setTitle("updated title heresad");
             book.setEdition("3rd edition");
             book.save();
         }
         else if(position == 4){
-            Book book = Book.findById(Book.class, 5);
+            Book book = Book.findById(Book.class, 6);
             book.delete();        }
         else if(position == 5){
 

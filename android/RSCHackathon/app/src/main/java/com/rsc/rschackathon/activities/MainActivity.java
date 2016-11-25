@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.Scopes;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -17,6 +18,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.rsc.rschackathon.R;
+import com.rsc.rschackathon.firebase.MyFirebaseMesagingService;
 
 import android.accounts.AccountManager;
 import android.content.Intent;
@@ -58,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
+        getIntent().getStringExtra(MyFirebaseMesagingService.TITLE_EXTRA);
+        String text = getIntent().getStringExtra(MyFirebaseMesagingService.TEXT_EXTRA);
+        String token = FirebaseInstanceId.getInstance().getToken();
+        Log.d(TAG, "Token: " + token);
+
+
+        if (text != null) {
+            Log.e("CALLED", text);
+        }
         facebookButton.setReadPermissions(Arrays.asList("public_profile", "email"));
         facebookButton.registerCallback(callbackManager, mCallback);
 
@@ -72,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.login_button)
     public void loginClicked() {
         startActivity(LoginActivity.createIntent(this));
+    }
+
+    @OnClick(R.id.register_button)
+    public void registerClicked() {
+        startActivity(RegisterActivity.createIntent(this));
     }
 
     @OnClick(R.id.google_button)

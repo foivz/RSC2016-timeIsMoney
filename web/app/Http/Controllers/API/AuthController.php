@@ -26,7 +26,7 @@ class AuthController extends BaseApiController
         $socialUser = Socialite::driver($request->get('provider'))
             ->userFromToken($request->get('access_token'));
 
-        $user = User::where($request->get('provider') . '_id')->first();
+        $user = User::where($request->get('provider') . '_id', $socialUser->getId())->first();
         if($user === null) {
             $user = new User();
             if($request->get('provider') == 'google') {
@@ -40,6 +40,7 @@ class AuthController extends BaseApiController
             $user->avatar_url = $socialUser->getAvatar();
             $user->save();
         }
+        $user->generateApiKey();
 
         return new APIResponse(200, $user->toArray());
     }

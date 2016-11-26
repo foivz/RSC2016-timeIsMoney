@@ -38,8 +38,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(final RecyclerViewAdapter.MyDevicesViewHolder holder, final int position) {
-        holder.deviceName.setText(deviceList.get(position));
-        holder.deviceIcon.setImageResource(R.mipmap.ic_launcher);
+        holder.number.setText(String.valueOf(position + 1));
+        holder.name.setText(deviceList.get(position));
     }
 
     @Override
@@ -60,11 +60,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public class MyDevicesViewHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.devices_item_name)
-        protected TextView deviceName;
+        @BindView(R.id.number)
+        protected TextView number;
 
-        @BindView(R.id.devices_item_icon)
-        protected ImageView deviceIcon;
+        @BindView(R.id.name)
+        protected TextView name;
+
+        @BindView(R.id.distance)
+        protected TextView distance;
+
+        @BindView(R.id.location)
+        protected TextView location;
+
+        @BindView(R.id.team_members)
+        protected TextView teamMembers;
+
+        @BindView(R.id.start_time)
+        protected TextView startTime;
 
         @OnClick(R.id.device_item_layout)
         public void onItemClicked(View view) {

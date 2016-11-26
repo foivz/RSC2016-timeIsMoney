@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/custom_marker_view"
+    android:paddingLeft="50dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+    <RelativeLayout
+        android:id="@+id/layout"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="3dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_marker_background"
+        android:padding="5dp"
+        >
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OUTLET NAME"
+            android:id="@+id/outlet_title"
+            android:textSize="10dp"
+            android:textColor="@android:color/black"
+            />
+        <TextView
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OUTLET PRODUCT"
+            android:id="@+id/outlet_product"
+            android:textSize="10dp"
+            android:textColor="@android:color/black"
+            android:layout_below="@id/outlet_title"
+            />
+    </RelativeLayout>
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:src="@mipmap/ic_launcher"
+        android:id="@+id/outlet_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        />
+
+</RelativeLayout>

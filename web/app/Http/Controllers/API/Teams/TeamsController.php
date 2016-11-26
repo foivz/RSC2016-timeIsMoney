@@ -64,7 +64,7 @@ class TeamsController extends BaseApiController
 
         $users = [];
         foreach($team->members as $member) {
-            $users[] = $member->user;
+            $users[] = User::find($member->user_id);
         }
         return new APIResponse(200, $users);
     }

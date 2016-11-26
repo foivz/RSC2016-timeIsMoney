@@ -35,7 +35,9 @@ Route::group(['prefix'=> '/api'], function() {
         Route::get('/team/{id}/members', 'API\Teams\TeamsController@getTeamMembers');
         Route::post('/team', 'API\Teams\TeamsController@create');
         Route::post('/team/join', 'API\Teams\TeamsController@joinTeam');
+
     });
+        Route::get('/event/{eventId}/question', 'Moderator\EventModerationController@getCurrentQuestion');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function() {
@@ -47,4 +49,7 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::get('moderator/moderate', 'Moderator\\EventModerationController@listOpenQuizzes');
     Route::get('moderator/lobby/{eventId}', 'Moderator\\EventModerationController@lobby')->name('lobby');
     Route::get('moderator/lobby/{eventId}/members', 'Moderator\\EventModerationController@getTeams')->name('lobby.teams');
+
+    Route::get('moderator/event/{eventId}/start', 'Moderator\\EventModerationController@startGame')->name('event.start');
+    Route::get('moderator/event/{eventId}/end', 'Moderator\\EventModerationController@endGame')->name('event.end');
 });

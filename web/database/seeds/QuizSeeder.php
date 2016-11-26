@@ -70,7 +70,7 @@ class QuizSeeder extends Seeder
         $question = \App\Question::create([
             'quiz_id' => $quiz->id,
             'text' => 'Who is the person depicted on the picture?',
-            'image' => "https://www.google.hr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiundqs78bQAhXKAxoKHYLpARQQjRwIBw&url=http%3A%2F%2Fdraculaevolution.weebly.com%2Fdracula.html&psig=AFQjCNEK1x3YO9lRJ7CfOplGmFKdJd0aUw&ust=1480265085573442",
+            'image' => "http://draculaevolution.weebly.com/uploads/6/6/2/0/662002/7060563_orig.jpg",
             'type_id' => 1
         ]);
         \App\Answer::create([

@@ -23,6 +23,7 @@ class CreateEventsTable extends Migration
             $table->decimal('lng',10,7);
             $table->integer('team_members');
             $table->dateTime('start_at');
+            $table->integer('current_question')->default(0);
             $table->timestamps();
         });
     }

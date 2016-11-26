@@ -17,10 +17,14 @@ class EventSeeder extends Seeder
             'location' => 'Old City Pub',
             'lat' => 46.3095798,
             'lng' => 16.337831,
-            'description' => 'Have fun at Halloween quiz at Old City Pub and win some awesome prizes',
+            'description' => 'Have fun at Halloween quiz at Old City Pub and win some awesome prizes.
+
+            1st place: 12L of beer
+            2nd place: 6L of beer
+            3rd place: 3L of beer',
             'start_at' => \Carbon\Carbon::parse('2016-11-26 22:10'),
             'status' => \App\Enum\EventStatusEnum::STATUS_OPEN,
-            'team_members' => 4,
+            'team_members' => 2,
         ]);
 
         \App\Event::create([

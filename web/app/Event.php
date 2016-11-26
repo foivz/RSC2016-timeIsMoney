@@ -21,4 +21,9 @@ class Event extends Model
         return $this->hasMany('App\Team');
     }
 
+    public function quiz()
+    {
+        return $this->belongsTo('App\Quiz');
+    }
+
 }

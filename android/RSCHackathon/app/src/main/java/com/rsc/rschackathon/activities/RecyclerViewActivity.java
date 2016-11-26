@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,7 +35,10 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
     RecyclerView recyclerView;
     
     @BindView(R.id.fab)
-    FloatingActionButton floatingActionButton;        
+    FloatingActionButton floatingActionButton;
+
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
 
     List<String> testList = new ArrayList<>();
 
@@ -43,6 +47,11 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
         ButterKnife.bind(this);
+
+        toolbar.setTitle("Nearby events");
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(false);
 
         recyclerViewAdapter = new RecyclerViewAdapter();
         linearLayoutManager = new LinearLayoutManager(this);

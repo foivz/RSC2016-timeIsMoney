@@ -1,10 +1,25 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/gmap"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></com.google.android.gms.maps.MapView>
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/colorPrimary"
+            app:theme="@style/ToolbarColoredBackArrow"
+            app:titleTextColor="@color/white" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/gmap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"></com.google.android.gms.maps.MapView>
+    </RelativeLayout>
 </FrameLayout>

@@ -35,4 +35,16 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'google' => [
+        'client_id' => '981151316904-cn6p9f0ea58ue401la9hhb8dhbnbs3bm.apps.googleusercontent.com',
+        'client_secret' => 'uj6oLRrW34qwAg3nSFN3D3Sz',
+        'redirect' => env('APP_URL') . '/auth/google/check'
+    ],
+
+    'facebook' => [
+        'client_id' => '222091578216716',
+        'client_secret' => '16b3bf25c9132a62769e79715f2ea12a',
+        'redirect' => env('APP_URL') . '/auth/facebook/check'
+    ],
+
 ];

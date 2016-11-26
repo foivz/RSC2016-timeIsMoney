@@ -17,4 +17,7 @@ Route::get('/', function () {
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+// Mobile
+Route::group(['prefix'=> '/api'], function() {
+    Route::post('/login', 'API\AuthController@login');
+});

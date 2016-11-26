@@ -20,4 +20,10 @@ Route::auth();
 // Mobile
 Route::group(['prefix'=> '/api'], function() {
     Route::post('/login', 'API\AuthController@login');
+
+    Route::get('/events', 'API\Events\EventsController@listAll');
+    Route::get('/events/current', 'API\Events\EventsController@listCurrent');
+
+    Route::group(['middleware'=> 'auth.api'], function() {
+    });
 });

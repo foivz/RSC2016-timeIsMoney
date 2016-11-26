@@ -26,19 +26,19 @@ class AuthController extends BaseApiController
         $socialUser = Socialite::driver($request->get('provider'))
             ->userFromToken($request->get('access_token'));
 
-        $user = User::where($request->get('provider') . '_id', $socialUser->getId())->first();
+        $user = User::where('email', $socialUser->getEmail())->first();
         if($user === null) {
             $user = new User();
-            if($request->get('provider') == 'google') {
-                $user->google_id = $socialUser->getId();
-            }
-            if($request->get('provider') == 'facebook') {
-                $user->facebook_id = $socialUser->getId();
-            }
             $user->name =  $socialUser->getName();
             $user->email = $socialUser->getEmail();
             $user->avatar_url = $socialUser->getAvatar();
             $user->save();
+        }
+        if($request->get('provider') == 'google') {
+            $user->google_id = $socialUser->getId();
+        }
+        if($request->get('provider') == 'facebook') {
+            $user->facebook_id = $socialUser->getId();
         }
         $user->generateApiKey();
 

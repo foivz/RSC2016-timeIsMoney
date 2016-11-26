@@ -57,8 +57,8 @@ class EventSeeder extends Seeder
         \App\Event::create([
             'name' => 'Park & Quiz',
             'location' => 'Restaurant Park',
-            'lat' => 46.3070178,
-            'lng' => 16.3364633,
+            'lat' => 46.3077495,
+            'lng' => 16.3405937,
             'description' => 'Have fun at Restaurant Park quiz',
             'start_at' => \Carbon\Carbon::parse('2016-11-27 22:10'),
             'team_members' => 4,

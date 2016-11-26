@@ -4,23 +4,84 @@
     android:id="@+id/device_item_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
     android:clickable="true"
+    android:clipToPadding="false"
     android:focusable="true"
-    android:background="?android:attr/selectableItemBackground">
+    android:paddingTop="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
-    <ImageView
-        android:id="@+id/devices_item_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@mipmap/ic_launcher"/>
 
     <TextView
-        android:id="@+id/devices_item_name"
-        android:layout_width="match_parent"
+        android:id="@+id/number"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/devices_item_icon"
-        android:textAlignment="center"
-        tools:text="Dell U2412M"/>
+        android:textColor="#222222"
+        android:textSize="21sp"
+        tools:text="1" />
 
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/number"
+        android:textColor="#494949"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        tools:text="History" />
+
+    <TextView
+        android:id="@+id/distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        tools:text="360m" />
+
+    <TextView
+        android:id="@+id/location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="17dp"
+        android:layout_toRightOf="@+id/number"
+        android:textColor="#222222"
+        tools:text="Old city Pub" />
+
+    <TextView
+        android:id="@+id/team_members"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/name"
+        android:layout_marginTop="17dp"
+        android:layout_toLeftOf="@+id/image"
+        tools:text="4" />
+
+    <ImageView
+        android:id="@+id/image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/name"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/profile_round_1342" />
+
+    <TextView
+        android:id="@+id/start_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/location"
+        android:layout_marginTop="17dp"
+        android:layout_toRightOf="@+id/number"
+        tools:text="Start at 5:00 pm" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/start_time"
+        android:layout_marginLeft="-17dp"
+        android:layout_marginRight="-17dp"
+        android:layout_marginTop="38dp"
+        android:background="#d8d8d8"></View>
 </RelativeLayout>

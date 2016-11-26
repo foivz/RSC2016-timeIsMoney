@@ -1,6 +1,7 @@
 package com.rsc.rschackathon.activities;
 
 import com.rsc.rschackathon.R;
+import com.rsc.rschackathon.adapters.ViewPagerAdapter;
 import com.rsc.rschackathon.api.NetworkService;
 import com.rsc.rschackathon.api.models.DocsApi;
 
@@ -9,9 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Button;
 
 import java.util.List;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import retrofit2.Call;
@@ -37,13 +40,13 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.login_activity_login_button)
     public void loginClicked() {
-       startActivity(VideoActivity.createIntent(this));
+        startActivity(TeamActivity.createIntent(this));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+/*
         networkService = new NetworkService();
         Call<List<DocsApi>> call = networkService.getAPI().getRepositories();
         call.enqueue(new Callback<List<DocsApi>>() {
@@ -56,6 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<List<DocsApi>> call, Throwable t) {
                 Log.i("TAG", "fail");
             }
-        });
+        });*/
     }
 }

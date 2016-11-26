@@ -1,10 +1,12 @@
 package com.rsc.rschackathon.api;
 
 import com.rsc.rschackathon.api.models.DocsApi;
+import com.rsc.rschackathon.api.models.LoginResponse;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
@@ -15,6 +17,6 @@ public interface RetrofitAPI {
     Call<List<DocsApi>> getRepositories(/*@Query("q") String name, @Query("sort") String sort*/);
 
     @FormUrlEncoded
-    @POST("/api/v1/auth/facebook")
-    public Call<DocsApi> getApiKey(/*@Field("accessToken") String accessToken*/);
+    @POST("/api/login")
+    public Call<LoginResponse> getApiKey(@Field("provider") String provider, @Field("access_token") String accessToken);
 }

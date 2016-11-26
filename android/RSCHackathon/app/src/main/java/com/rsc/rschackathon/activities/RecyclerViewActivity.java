@@ -1,5 +1,6 @@
 package com.rsc.rschackathon.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -7,7 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.rsc.rschackathon.R;
@@ -31,7 +37,10 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
     RecyclerView recyclerView;
     
     @BindView(R.id.fab)
-    FloatingActionButton floatingActionButton;        
+    FloatingActionButton floatingActionButton;
+
+    @BindView(R.id.toolbar)
+    protected Toolbar toolbar;
 
     List<String> testList = new ArrayList<>();
 
@@ -40,6 +49,11 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycler_view);
         ButterKnife.bind(this);
+
+        toolbar.setTitle("Nearby events");
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setHomeButtonEnabled(false);
 
         recyclerViewAdapter = new RecyclerViewAdapter();
         linearLayoutManager = new LinearLayoutManager(this);
@@ -68,49 +82,77 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         recyclerView.setAdapter(recyclerViewAdapter);
 
 
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(RecyclerViewActivity.this, "FAB", Toast.LENGTH_SHORT).show();
-            }
-        });
-        
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
-                if (dy > 0)
-                    floatingActionButton.hide();
-                else if (dy < 0)
-                    floatingActionButton.show();
-            }
-        });
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(RecyclerViewActivity.this, "FAB", Toast.LENGTH_SHORT).show();
+//            }
+//        });
+//
+//        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener(){
+//            @Override
+//            public void onScrolled(RecyclerView recyclerView, int dx, int dy){
+//                if (dy > 0)
+//                    floatingActionButton.hide();
+//                else if (dy < 0)
+//                    floatingActionButton.show();
+//            }
+//        });
 
     }
 
     @Override
     public void getDeviceAtPosition(int position) {
-        if(position == 1){
-            Book book = new Book("51", "TINO", "4");
-            book.save();
+//        if(position == 1){
+//            Book book = new Book("51", "TINO", "4");
+//            book.save();
+//
+//        }
+//        else if(position == 2){
+//            Book book = Book.findById(Book.class, 6);
+//            Toast.makeText(this, book.getTitle(), Toast.LENGTH_SHORT).show();
+//            //List<Note> notes = Note.findWithQuery(Note.class, "Select * from Note where name = ?", "satya");
+//
+//        }
+//        else if(position == 3){
+//            Book book = Book.findById(Book.class, 6);
+//            book.setTitle("updated title heresad");
+//            book.setEdition("3rd edition");
+//            book.save();
+//        }
+//        else if(position == 4){
+//            Book book = Book.findById(Book.class, 6);
+//            book.delete();        }
+//        else if(position == 5){
+//
+//        }
 
-        }
-        else if(position == 2){
-            Book book = Book.findById(Book.class, 6);
-            Toast.makeText(this, book.getTitle(), Toast.LENGTH_SHORT).show();
-            //List<Note> notes = Note.findWithQuery(Note.class, "Select * from Note where name = ?", "satya");
+        showDialogEvent(testList.get(position));
+        Toast.makeText(this, testList.get(position), Toast.LENGTH_SHORT).show();
+    }
 
-        }
-        else if(position == 3){
-            Book book = Book.findById(Book.class, 6);
-            book.setTitle("updated title heresad");
-            book.setEdition("3rd edition");
-            book.save();
-        }
-        else if(position == 4){
-            Book book = Book.findById(Book.class, 6);
-            book.delete();        }
-        else if(position == 5){
+    private void showDialogEvent(final String clicked) {
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.event_dialog);
+            dialog.show();
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.view_pager_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.search:
+                startActivity(new Intent(RecyclerViewActivity.this, MapsActivity.class));
+            default:
+                break;
         }
+        return true;
     }
 }

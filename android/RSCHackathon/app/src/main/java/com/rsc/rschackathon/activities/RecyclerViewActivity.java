@@ -1,5 +1,6 @@
 package com.rsc.rschackathon.activities;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Toast;
 
 import com.rsc.rschackathon.R;
@@ -125,7 +127,15 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
 //
 //        }
 
+        showDialogEvent(testList.get(position));
         Toast.makeText(this, testList.get(position), Toast.LENGTH_SHORT).show();
+    }
+
+    private void showDialogEvent(final String clicked) {
+            final Dialog dialog = new Dialog(this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.event_dialog);
+            dialog.show();
     }
 
     @Override

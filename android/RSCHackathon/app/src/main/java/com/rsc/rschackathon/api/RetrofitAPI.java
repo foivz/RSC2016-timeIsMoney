@@ -6,6 +6,7 @@ import com.rsc.rschackathon.api.models.CurrentEvent;
 import com.rsc.rschackathon.api.models.DocsApi;
 import com.rsc.rschackathon.api.models.GetTeamMembersAPI;
 import com.rsc.rschackathon.api.models.LoginResponse;
+import com.rsc.rschackathon.api.models.Question;
 
 import java.util.List;
 
@@ -16,6 +17,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface RetrofitAPI {
 
@@ -44,4 +46,7 @@ public interface RetrofitAPI {
     @POST("/api/team/join")
     public Call<AddTeamMemberApi> addTeamMembers(@Header("X-Authorization") String apyKey, @Field("team_id") int teamId,
             @Field("user_id") int userId);
+
+    @GET("/api/question/5")
+    Call<Question> getQuestion();
 }

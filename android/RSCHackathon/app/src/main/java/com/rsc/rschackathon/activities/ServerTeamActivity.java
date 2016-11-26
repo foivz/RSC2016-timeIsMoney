@@ -25,6 +25,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -54,6 +55,11 @@ public class ServerTeamActivity extends AppCompatActivity
 
     public static Intent createIntent(final Context context) {
         return new Intent(context, ServerTeamActivity.class).putExtra("id", 100);
+    }
+
+    @OnClick(R.id.activity_server_team_play)
+    public void startQActivity(){
+        startActivity(new Intent(ServerTeamActivity.this, QuestionActivity.class));
     }
 
     @Override

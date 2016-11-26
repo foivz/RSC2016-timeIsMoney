@@ -33,76 +33,56 @@
         <ImageView
             android:id="@+id/question_image"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="100dp"
             android:layout_below="@+id/question_text"
             android:layout_marginLeft="55dp"
             android:layout_marginRight="55dp"
             android:layout_marginTop="20dp"
             tools:src="@mipmap/ic_launcher" />
 
-        <Button
+        <ImageView
             android:id="@+id/button_c"
             android:layout_width="145dp"
-            android:layout_height="60dp"
+            android:layout_height="85dp"
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/round_button_question_blue"
-            android:paddingLeft="15dp"
-            android:textAlignment="viewStart"
-            android:textColor="#2196f3"
-            tools:text="C" />
+            />
 
-        <Button
+        <ImageView
             android:id="@+id/button_a"
             android:layout_width="145dp"
-            android:layout_height="60dp"
+            android:layout_height="85dp"
             android:layout_above="@+id/button_c"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="30dp"
-            android:background="@drawable/round_button_question_blue"
-            android:paddingLeft="15dp"
-            android:textAlignment="viewStart"
-            android:textColor="#2196f3"
-            tools:text="A" />
+            />
 
-        <Button
+        <ImageView
             android:id="@+id/button_b"
             android:layout_width="145dp"
-            android:layout_height="60dp"
+            android:layout_height="85dp"
             android:layout_above="@+id/button_c"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="20dp"
             android:layout_marginRight="30dp"
-            android:background="@drawable/round_button_question_blue"
-            android:paddingLeft="15dp"
-            android:textAlignment="viewStart"
-            android:textColor="#2196f3"
-            tools:text="B" />
+            />
 
-        <Button
+        <ImageView
             android:id="@+id/button_d"
             android:layout_width="145dp"
-            android:layout_height="60dp"
+            android:layout_height="85dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginRight="30dp"
-            android:background="@drawable/round_button_question_blue"
-            android:paddingLeft="15dp"
-            android:textAlignment="viewStart"
-            android:textColor="#2196f3"
-            tools:text="D" />
+             />
 
-        <Button
+        <ImageView
             android:id="@+id/button_c2"
             android:layout_width="145dp"
-            android:layout_height="60dp"
+            android:layout_height="85dp"
             android:layout_alignParentBottom="true"
-            android:background="@drawable/round_button_question_blue"
-            android:paddingLeft="15dp"
-            android:textAlignment="viewStart"
-            android:textColor="#2196f3"
             android:layout_centerHorizontal="true"
-            tools:text="C" />
+             />
 
 
     </RelativeLayout>

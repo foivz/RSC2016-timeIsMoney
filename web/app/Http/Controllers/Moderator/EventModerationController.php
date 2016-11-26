@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Response\APIResponse;
+use App\Question;
 use App\Team;
 use Session;
 
@@ -29,5 +30,29 @@ class EventModerationController extends Controller
     {
         $teams = Team::where('event_id', $eventId)->with('members')->get();
         return new APIResponse(200, $teams);
+    }
+
+    public function startGame($eventId)
+    {
+        $event = Event::find($eventId);
+        $event->status = EventStatusEnum::STATUS_STARTED;
+        $event->current_question++;
+
+        $questions = Question::where('quiz_id', $event->quiz->id)->with('answers')->get();
+        if(count($questions) < $event->current_question) {
+            return redirect(route('event.end', ['eventId' => $event->id]));
+        }
+        $event->save();
+
+        return view('moderator.moderation.game')
+            ->with('event', $event)
+            ->with('question', $questions[$event->current_question-1]);
+    }
+
+    public function endGame($eventId)
+    {
+        $event = Event::find($eventId);
+        $event->status = EventStatusEnum::STATUS_FINISHED;
+        return "ended";
     }
 }

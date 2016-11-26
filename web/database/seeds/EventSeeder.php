@@ -17,10 +17,14 @@ class EventSeeder extends Seeder
             'location' => 'Old City Pub',
             'lat' => 46.3095798,
             'lng' => 16.337831,
-            'description' => 'Have fun at Halloween quiz at Old City Pub and win some awesome prizes',
-            'start_at' => \Carbon\Carbon::parse('2016-11-26 22:10'),
+            'description' => 'Have fun at Halloween quiz at Old City Pub and win some awesome prizes.
+
+            1st place: 12L of beer
+            2nd place: 6L of beer
+            3rd place: 3L of beer',
+            'start_at' => \Carbon\Carbon::parse('2016-11-27 22:10'),
             'status' => \App\Enum\EventStatusEnum::STATUS_OPEN,
-            'team_members' => 4,
+            'team_members' => 2,
         ]);
 
         \App\Event::create([
@@ -30,7 +34,7 @@ class EventSeeder extends Seeder
             'lat' => 46.3080559,
             'lng' => 16.3352782,
             'description' => 'Dress up barouqe style and visit us to play!',
-            'start_at' => \Carbon\Carbon::parse('2016-11-26 23:15'),
+            'start_at' => \Carbon\Carbon::parse('2016-11-27 23:15'),
             'status' => \App\Enum\EventStatusEnum::STATUS_OPEN,
             'team_members' => 4,
         ]);
@@ -54,7 +58,7 @@ class EventSeeder extends Seeder
             'lat' => 46.3070178,
             'lng' => 16.3364633,
             'description' => 'Eat awesome pizza and find out how much you know about it',
-            'start_at' => \Carbon\Carbon::parse('2016-11-27 21:45'),
+            'start_at' => \Carbon\Carbon::parse('2016-11-30 21:45'),
             'team_members' => 4,
         ]);
 
@@ -65,7 +69,7 @@ class EventSeeder extends Seeder
             'lat' => 46.3077495,
             'lng' => 16.3405937,
             'description' => 'Have fun at Restaurant Park quiz',
-            'start_at' => \Carbon\Carbon::parse('2016-11-27 22:10'),
+            'start_at' => \Carbon\Carbon::parse('2016-11-29 22:10'),
             'team_members' => 4,
         ]);
 

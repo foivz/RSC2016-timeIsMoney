@@ -1,13 +1,11 @@
 package com.rsc.rschackathon.fragments;
 
 import android.app.Fragment;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,12 +17,12 @@ import com.squareup.picasso.Picasso;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FragmentQuestionTypeOne extends Fragment {
+public class FragmentQuestionTypeTwo extends Fragment {
 
 
     private Question question;
 
-    public FragmentQuestionTypeOne() {
+    public FragmentQuestionTypeTwo() {
 
     }
 
@@ -35,26 +33,26 @@ public class FragmentQuestionTypeOne extends Fragment {
     ImageView questionImage;
 
     @BindView(R.id.button_a)
-    Button buttonA;
+    ImageView buttonA;
 
     @BindView(R.id.button_b)
-    Button buttonB;
+    ImageView buttonB;
 
     @BindView(R.id.button_c)
-    Button buttonC;
+    ImageView buttonC;
 
     @BindView(R.id.button_d)
-    Button buttonD;
+    ImageView buttonD;
 
     @BindView(R.id.button_c2)
-    Button buttonC2;
+    ImageView buttonC2;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         LayoutInflater lf = getActivity().getLayoutInflater();
-        View view = lf.inflate(R.layout.fragment_question_type_one, container, false);
+        View view = lf.inflate(R.layout.fragment_question_type_two, container, false);
 
         ButterKnife.bind(this, view);
 
@@ -65,25 +63,23 @@ public class FragmentQuestionTypeOne extends Fragment {
             if (!TextUtils.isEmpty(question.getImage())) {
                 Picasso.with(getActivity()).load(question.getImage()).into(questionImage);
             }
-            if(question.getAnswers().size() == 4) {
-                buttonA.setText("A. " + question.getAnswers().get(0).getPayload());
-                buttonB.setText("B. " + question.getAnswers().get(1).getPayload());
-                buttonC.setText("C. " + question.getAnswers().get(2).getPayload());
-                buttonD.setText("D. " + question.getAnswers().get(3).getPayload());
+            if (question.getAnswers().size() == 4) {
+                Picasso.with(getActivity()).load(question.getAnswers().get(0).getPayload()).into(buttonA);
+                Picasso.with(getActivity()).load(question.getAnswers().get(1).getPayload()).into(buttonB);
+                Picasso.with(getActivity()).load(question.getAnswers().get(2).getPayload()).into(buttonC);
+                Picasso.with(getActivity()).load(question.getAnswers().get(3).getPayload()).into(buttonD);
                 buttonC2.setVisibility(View.GONE);
 
-            }
-            else if(question.getAnswers().size() == 2){
-                buttonA.setText("A. " + question.getAnswers().get(0).getPayload());
-                buttonB.setText("B. " + question.getAnswers().get(1).getPayload());
+            } else if (question.getAnswers().size() == 2) {
+                Picasso.with(getActivity()).load(question.getAnswers().get(1).getPayload()).into(buttonA);
+                Picasso.with(getActivity()).load(question.getAnswers().get(2).getPayload()).into(buttonB);
                 buttonC.setVisibility(View.GONE);
                 buttonD.setVisibility(View.GONE);
                 buttonC2.setVisibility(View.GONE);
-            }
-            else if(question.getAnswers().size() == 3){
-                buttonA.setText("A. " + question.getAnswers().get(0).getPayload());
-                buttonB.setText("B. " + question.getAnswers().get(1).getPayload());
-                buttonC2.setText("C. " + question.getAnswers().get(2).getPayload());
+            } else if (question.getAnswers().size() == 3) {
+                Picasso.with(getActivity()).load(question.getAnswers().get(0).getPayload()).into(buttonA);
+                Picasso.with(getActivity()).load(question.getAnswers().get(1).getPayload()).into(buttonB);
+                Picasso.with(getActivity()).load(question.getAnswers().get(2).getPayload()).into(buttonC2);
                 buttonC.setVisibility(View.INVISIBLE);
                 buttonD.setVisibility(View.INVISIBLE);
             }
@@ -93,7 +89,7 @@ public class FragmentQuestionTypeOne extends Fragment {
         return view;
     }
 
-    private void setDisable(){
+    private void setDisable() {
         buttonA.setEnabled(false);
         buttonB.setEnabled(false);
         buttonC.setEnabled(false);
@@ -101,17 +97,16 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonC2.setEnabled(false);
     }
 
-    private void setOnClickListeners(){
+    private void setOnClickListeners() {
         buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(0).getCorrect() == 1){
+                if (question.getAnswers().get(0).getCorrect() == 1) {
                     buttonA.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
-                    buttonA.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                    buttonA.setAlpha(0.6F);
+                } else {
                     buttonA.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
-                    buttonA.setTextColor(getResources().getColor(R.color.white));
+                    buttonA.setAlpha(0.6F);
                 }
                 setDisable();
             }
@@ -119,13 +114,13 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(1).getCorrect() == 1){
+                if (question.getAnswers().get(1).getCorrect() == 1) {
                     buttonB.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
-                    buttonB.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                    buttonB.setAlpha(0.6F);
+
+                } else {
                     buttonB.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
-                    buttonB.setTextColor(getResources().getColor(R.color.white));
+                    buttonB.setAlpha(0.6F);
                 }
                 setDisable();
 
@@ -135,13 +130,13 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(2).getCorrect() == 1){
+                if (question.getAnswers().get(2).getCorrect() == 1) {
                     buttonC.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
-                    buttonC.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                    buttonC.setAlpha(0.6F);
+
+                } else {
                     buttonC.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
-                    buttonC.setTextColor(getResources().getColor(R.color.white));
+                    buttonC.setAlpha(0.6F);
                 }
                 setDisable();
 
@@ -151,13 +146,12 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(3).getCorrect() == 1){
+                if (question.getAnswers().get(3).getCorrect() == 1) {
                     buttonD.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
-                    buttonD.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                    buttonD.setAlpha(0.6F);
+                } else {
                     buttonD.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
-                    buttonD.setTextColor(getResources().getColor(R.color.white));
+                    buttonD.setAlpha(0.6F);
                 }
                 setDisable();
 
@@ -167,13 +161,12 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonC2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(2).getCorrect() == 1){
+                if (question.getAnswers().get(2).getCorrect() == 1) {
                     buttonC2.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
-                    buttonC2.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                    buttonC2.setAlpha(0.6F);
+                } else {
                     buttonC2.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
-                    buttonC2.setTextColor(getResources().getColor(R.color.white));
+                    buttonC2.setAlpha(0.6F);
                 }
                 setDisable();
             }

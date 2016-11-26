@@ -16,6 +16,7 @@ class CreateTeamMembersTable extends Migration
             $table->increments('id');
             $table->integer('team_id');
             $table->integer('user_id');
+            $table->integer('score')->default(0);
             $table->timestamps();
         });
     }

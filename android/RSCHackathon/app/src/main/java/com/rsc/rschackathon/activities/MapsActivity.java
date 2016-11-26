@@ -180,7 +180,9 @@ public class MapsActivity extends AppCompatActivity implements
         }
 
 
-        Picasso.with(getApplicationContext()).load("http://files.softicons.com/download/holidays-icons/halloween-icon-set-by-yootheme/png/512x512/pumpkin.png").into(icon);
+//        Picasso.with(getApplicationContext()).load("http://files.softicons.com/download/holidays-icons/halloween-icon-set-by-yootheme/png/512x512/pumpkin.png").into(icon);
+        Picasso.with(getApplicationContext()).load(R.drawable.category).into(icon);
+
         name.setText(event.getName());
         location.setText(event.getLocation());
         teamMembers.setText(event.getTeam_members());
@@ -212,7 +214,7 @@ public class MapsActivity extends AppCompatActivity implements
                                 mGoogleApiClient);
                         if (mLastLocation != null) {
                             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0f));
                             Log.e("LAT AND LONG123 ", String.valueOf(mLastLocation.getLatitude()) + "     " + String.valueOf(mLastLocation.getLongitude()));
                             mMapView.onResume();
                         }
@@ -244,9 +246,9 @@ public class MapsActivity extends AppCompatActivity implements
 
                     MarkerOptions marker = new MarkerOptions().position(latLng).title(String.valueOf(data.getId()));
 
-                    //TODO CHCECK THIS
-//                    marker.icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(getResources().getDrawable(R.mipmap.ic_launcher),data.getName(),data.getStart_at())));
-                    marker.icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView("http://files.softicons.com/download/holidays-icons/halloween-icon-set-by-yootheme/png/512x512/pumpkin.png", data.getName(), data.getStart_at())));
+                    //TODO CHCECK THIS URL OR DRAWABLE
+                    marker.icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView(getResources().getDrawable(R.drawable.group_2),data.getName(),data.getStart_at())));
+//                    marker.icon(BitmapDescriptorFactory.fromBitmap(getMarkerBitmapFromView("http://files.softicons.com/download/holidays-icons/halloween-icon-set-by-yootheme/png/512x512/pumpkin.png", data.getName(), data.getStart_at())));
 
 
                     googleMap.addMarker(marker);
@@ -264,7 +266,8 @@ public class MapsActivity extends AppCompatActivity implements
         });
     }
 
-    private Bitmap getMarkerBitmapFromView(String image, String outletName, String outletProduct) {
+//    private Bitmap getMarkerBitmapFromView(String image, String outletName, String outletProduct) {
+private Bitmap getMarkerBitmapFromView(Drawable drawable1, String outletName, String outletProduct) {
 
         View customMarkerView = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker, null);
         ImageView markerImageView = (ImageView) customMarkerView.findViewById(R.id.outlet_image);
@@ -272,8 +275,8 @@ public class MapsActivity extends AppCompatActivity implements
         TextView outletProductCustom = (TextView) customMarkerView.findViewById(R.id.outlet_product);
 
 
-//        markerImageView.setImageDrawable(drawable1);
-        Picasso.with(getApplicationContext()).load(image).into(markerImageView);
+        markerImageView.setImageDrawable(drawable1);
+//        Picasso.with(getApplicationContext()).load(image).into(markerImageView);
         outletTitle.setText(outletName);
         outletProductCustom.setText(outletProduct);
 
@@ -305,7 +308,7 @@ public class MapsActivity extends AppCompatActivity implements
                 mGoogleApiClient);
         if (mLastLocation != null) {
             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14.0f));
+            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16.0f));
             Log.e("LAT AND LONG ", String.valueOf(mLastLocation.getLatitude()) + "     " + String.valueOf(mLastLocation.getLongitude()));
 
 
@@ -364,74 +367,4 @@ public class MapsActivity extends AppCompatActivity implements
     }
 }
 
-//TODO KREIRANJE DIALOGA
-
-
-//    private void showDialogHomeListFragment(final Outlets clickedOutlet) {
-//        if (isLoaded) {
-//            final Dialog dialog = new Dialog(ctx);
-//            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-//            dialog.setContentView(R.layout.home_list_dialog);
-//
-//            TextView start = (TextView) dialog.findViewById(R.id.start);
-//            TextView title = (TextView) dialog.findViewById(R.id.restaurant_title);
-//            TextView product = (TextView) dialog.findViewById(R.id.product);
-//            TextView text = (TextView) dialog.findViewById(R.id.text);
-//            ImageView close = (ImageView) dialog.findViewById(R.id.close);
-//            final ImageView restImage = (ImageView) dialog.findViewById(R.id.restaurant_image);
-//
-//            title.setText(clickedOutlet.getName());
-//            product.setText(clickedOutlet.getReward());
-////                restImage.setImageDrawable(this.restImage.getDrawable());
-//
-//            Picasso.with(ctx).load(clickedOutlet.getParseFile("logo").getUrl()).into(restImage);
-//            List<String> distanceSplited = Parse(clickedOutlet.getDistanceBetweenUserAndOutlet().toString());
-//
-////            Log.e("DISTANCE", distanceSplited.get(0));
-//
-//            float distanceInMetters = Float.parseFloat(distanceSplited.get(0)) * kmToM;
-//            Log.e("DISTANCE METTERS", String.valueOf(distanceInMetters));
-////            if(distanceInMetters <= outletCloseEnough){
-//            if (clickedOutlet.getName().equals("Barnabee's")) {   //TODO THIS IS JUST FOR TESTING CHAT ACTIVITY
-//
-//                text.setText(R.string.close_enough);
-//                start.setText(R.string.start);
-//                start.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-////                            Log.e("outletsID", outletsID.toString());
-//                        Intent intent = new Intent(ctx, ChatActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-//                        intent.putExtra(QUESTION, clickedOutlet.getOutletID());
-//                        intent.putExtra(OUTLET_NAME, clickedOutlet.getName());
-//                        intent.putExtra(IMAGE_URL, clickedOutlet.getParseFile("logo").getUrl());
-//                        ctx.startActivity(intent);
-//
-//                        isLoaded = false;
-//                        dialog.dismiss();
-//
-//                    }
-//                });
-//            } else {
-//                text.setText(R.string.to_far);
-//                start.setText(R.string.ok);
-//                start.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        isLoaded = false;
-//                        dialog.dismiss();
-//                    }
-//                });
-//            }
-//
-//            close.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    dialog.dismiss();
-//                }
-//            });
-//            dialog.show();
-//
-//        }
-//    }
 

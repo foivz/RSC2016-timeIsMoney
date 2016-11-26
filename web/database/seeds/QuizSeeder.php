@@ -47,6 +47,33 @@ class QuizSeeder extends Seeder
 
         $question = \App\Question::create([
             'quiz_id' => $quiz->id,
+            'text' => 'Which of these vegetables is used as decoration on halloween?',
+            'image' => null,
+            'type_id' => 2
+        ]);
+        \App\Answer::create([
+            'question_id' => $question->id,
+            'payload' => 'http://steamykitchen.com/wp-content/uploads/2010/09/baked-spaghetti-squash-garlic-butter-4564.jpg',
+            'correct' => true,
+        ]);
+        \App\Answer::create([
+            'question_id' => $question->id,
+            'payload' => 'http://www.thealthbenefitsof.com/wp-content/uploads/2015/08/Health-Benefits-of-Paprika.jpg',
+            'correct' => false,
+        ]);
+        \App\Answer::create([
+            'question_id' => $question->id,
+            'payload' => 'http://ipravda.sk/res/2013/05/20/thumbs/mrkva-karotka_01-nestandard2.jpg',
+            'correct' => false,
+        ]);
+        \App\Answer::create([
+            'question_id' => $question->id,
+            'payload' => 'http://weknowyourdreams.com/images/potato/potato-01.jpg',
+            'correct' => false,
+        ]);
+
+        $question = \App\Question::create([
+            'quiz_id' => $quiz->id,
             'text' => 'Which Catholic Church holiday is Halloween linked to?',
             'image' => null,
             'type_id' => 1
@@ -70,7 +97,7 @@ class QuizSeeder extends Seeder
         $question = \App\Question::create([
             'quiz_id' => $quiz->id,
             'text' => 'Who is the person depicted on the picture?',
-            'image' => "https://www.google.hr/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=0ahUKEwiundqs78bQAhXKAxoKHYLpARQQjRwIBw&url=http%3A%2F%2Fdraculaevolution.weebly.com%2Fdracula.html&psig=AFQjCNEK1x3YO9lRJ7CfOplGmFKdJd0aUw&ust=1480265085573442",
+            'image' => "http://draculaevolution.weebly.com/uploads/6/6/2/0/662002/7060563_orig.jpg",
             'type_id' => 1
         ]);
         \App\Answer::create([
@@ -86,6 +113,28 @@ class QuizSeeder extends Seeder
         \App\Answer::create([
             'question_id' => $question->id,
             'payload' => 'Donald Trump',
+            'correct' => false,
+        ]);
+
+        $question = \App\Question::create([
+            'quiz_id' => $quiz->id,
+            'text' => 'Which of these is an acorn pumpkin?',
+            'image' => null,
+            'type_id' => 2
+        ]);
+        \App\Answer::create([
+            'question_id' => $question->id,
+            'payload' => 'http://steamykitchen.com/wp-content/uploads/2010/09/baked-spaghetti-squash-garlic-butter-4564.jpg',
+            'correct' => true,
+        ]);
+        \App\Answer::create([
+            'question_id' => $question->id,
+            'payload' => 'http://farm5.static.flickr.com/4087/5196852790_3700682351.jpg',
+            'correct' => false,
+        ]);
+        \App\Answer::create([
+            'question_id' => $question->id,
+            'payload' => 'http://dingo.care2.com/pictures/greenliving/uploads/2015/09/ThinkstockPhotos-467072711-293x4431.jpg',
             'correct' => false,
         ]);
 

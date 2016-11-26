@@ -5,15 +5,11 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.rsc.rschackathon.R;
 import com.rsc.rschackathon.adapters.ViewPagerAdapter;
-import com.rsc.rschackathon.fragments.FragmentViewPagerOne;
-import com.rsc.rschackathon.fragments.FragmentViewPagerTwo;
+import com.rsc.rschackathon.fragments.FragmentListOfQuizzes;
+import com.rsc.rschackathon.fragments.FragmentMapWithQuizzes;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,7 +34,7 @@ public class ViewPagerActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        toolbar.setTitle("View Pager Activity");
+        toolbar.setTitle("");
         toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(false);
@@ -51,28 +47,27 @@ public class ViewPagerActivity extends AppCompatActivity {
     }
 
 
-
     private void setupViewPager(ViewPager viewPager) {
-        viewPagerAdapter.addFragment(FragmentViewPagerOne.newInstance("FIRST FRAGMENT"), "FIRST");
-        viewPagerAdapter.addFragment(FragmentViewPagerTwo.newInstance("SECOND FRAGMENT"), "SECOND");
+        viewPagerAdapter.addFragment(FragmentListOfQuizzes.newInstance("LIST"), "LIST");
+        viewPagerAdapter.addFragment(FragmentMapWithQuizzes.newInstance("MAP"), "MAP");
         viewPager.setAdapter(viewPagerAdapter);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.view_pager_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.search:
-                Toast.makeText(this, "SEARCH", Toast.LENGTH_SHORT).show();
-            default:
-                break;
-        }
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.view_pager_menu, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.search:
+//                Toast.makeText(this, "SEARCH", Toast.LENGTH_SHORT).show();
+//            default:
+//                break;
+//        }
+//        return true;
+//    }
 }

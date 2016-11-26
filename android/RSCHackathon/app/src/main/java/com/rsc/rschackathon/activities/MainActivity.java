@@ -41,6 +41,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    public static String API_KEY;
     private static final int RC_SIGN_IN = 9001;
 
     private static final String TAG = MainActivity.class.getName();
@@ -86,12 +88,12 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.login_button)
     public void loginClicked() {
-        startActivity(LoginActivity.createIntent(this));
+        startActivity(TeamActivity.createIntent(this));
     }
 
     @OnClick(R.id.register_button)
     public void registerClicked() {
-        startActivity(RegisterActivity.createIntent(this));
+        startActivity(new Intent(MainActivity.this, RecyclerViewActivity.class));
     }
 
     @OnClick(R.id.google_button)
@@ -128,8 +130,9 @@ public class MainActivity extends AppCompatActivity {
                         if (response.body() == null) {
                             Log.i("TAG", "Greška na serveru");
                         } else {
-                            String API_KEY = response.body().getData().getApi_key();
-                            Log.i("TAG", "on response " + API_KEY);/*
+                            String APIKEY = response.body().getData().getApi_key();
+                            API_KEY = APIKEY;
+                            Log.i("TAG", "on response " + APIKEY);/*
                             writeTokenToSharedPreferences(response.body().getData().getApiKey());
 
                             Call<User> userCall = networkService.getAPI().getUser(API_KEY);
@@ -243,6 +246,7 @@ public class MainActivity extends AppCompatActivity {
 
                             if (response.body() != null) {
                                 Log.i("TAG", "google apykey " + response.body().getData().getApi_key());
+                                API_KEY =  response.body().getData().getApi_key();
                                 /*mainActivity.writeTokenToSharedPreferences(response.body().getData().getApiKey());
                                 Call<User> userCall = mainActivity.networkService.getAPI().getUser(response.body().getData().getApiKey());
                                 userCall.enqueue(new Callback<User>() {

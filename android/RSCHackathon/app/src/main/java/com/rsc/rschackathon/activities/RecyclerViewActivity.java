@@ -207,6 +207,8 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
             public void onClick(View view) {
                 Toast.makeText(RecyclerViewActivity.this, "JOIN", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
+                startActivity(new Intent(RecyclerViewActivity.this, TeamActivity.class));
+
             }
         });
 
@@ -215,6 +217,7 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
             public void onClick(View view) {
                 Toast.makeText(RecyclerViewActivity.this, "CREATE", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
+                startActivity(new Intent(RecyclerViewActivity.this, CreateTeamActivity.class));
             }
         });
 

@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Response;
 
+use Illuminate\Http\Response;
+
 class APIResponse
 {
 

@@ -3,70 +3,77 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Laravel\Socialite\Facades\Socialite;
 use Validator;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
-use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Registration & Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles the registration of new users, as well as the
-    | authentication of existing users. By default, this controller uses
-    | a simple trait to add these behaviors. Why don't you explore it?
-    |
-    */
-
-    use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+    private $supportedProviders = [
+        'facebook',
+        'google',
+    ];
 
     /**
-     * Where to redirect users after login / registration.
+     * Redirect the user to the GitHub authentication page.
      *
-     * @var string
+     * @param $provider
+     * @return Response
      */
-    protected $redirectTo = '/';
-
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function redirectToProvider($provider)
     {
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        if(in_array($provider, $this->supportedProviders)) {
+            return Socialite::driver($provider)->redirect();
+        }
+        return response('Provider not found.', 404);
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Obtain the user information from GitHub.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param $provider
+     * @return Response
      */
-    protected function validator(array $data)
+    public function handleProviderCallback(Request $request, $provider)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
-        ]);
+        if(in_array($provider, $this->supportedProviders) == false)
+            return response('Provider not found.', 404);
+        // Fetch user data
+        $socialUser = Socialite::driver($provider)->user();
+
+        $user = User::where('email', $socialUser->getEmail())->first();
+        if($user === null) {
+            $user = new User();
+            $user->name =  $socialUser->getName();
+            $user->email = $socialUser->getEmail();
+            $user->avatar_url = $socialUser->getAvatar();
+            $user->password = Hash::make(str_random(64));
+            $user->save();
+        }
+        if($provider == 'google') {
+            $user->google_id = $socialUser->getId();
+        }
+        if($provider == 'facebook') {
+            $user->facebook_id = $socialUser->getId();
+        }
+        $user->generateApiKey();
+        // Log in the user
+        Auth::login($user);
+        return redirect('moderator/event');
     }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
+    public function login()
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        return view('auth.login');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
 }

@@ -25,9 +25,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class TeamActivity extends AppCompatActivity
-        implements NfcAdapter.CreateNdefMessageCallback, TeamListAdapter.Listener {
-
+public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback, TeamListAdapter.Listener {
 
     TextView textInfo;
 
@@ -45,13 +43,13 @@ public class TeamActivity extends AppCompatActivity
     RecyclerView teamList;
 
     public static Intent createIntent(final Context context) {
-        return new Intent(context, TeamActivity.class).putExtra("id", 100);
+        return new Intent(context, ServerTeamActivity.class).putExtra("id", 100);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_team);
+        setContentView(R.layout.activity_server_team);
 
         ButterKnife.bind(this);
 
@@ -71,6 +69,7 @@ public class TeamActivity extends AppCompatActivity
                     "Set Callback(s)",
                     Toast.LENGTH_LONG).show();
             nfcAdapter.setNdefPushMessageCallback(this, this);
+            nfcAdapter.setOnNdefPushCompleteCallback(this, this);
         }
 
         recyclerViewAdapter = new TeamListAdapter();
@@ -84,7 +83,6 @@ public class TeamActivity extends AppCompatActivity
 
     @Override
     public void getDeviceAtPosition(int position) {
-
     }
 
     @Override
@@ -123,11 +121,34 @@ public class TeamActivity extends AppCompatActivity
         nfcAdapter.disableForegroundDispatch(this);
     }
 
+    @Override
+    public void onNdefPushComplete(NfcEvent event) {
+
+        final String eventString = "onNdefPushComplete\n" + event.toString();
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(),
+                        eventString,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
 
-        String stringOut = textOut.getText().toString();
+
+
+
+
+
+
+
+
+        String stringOut = String.valueOf(CreateTeamActivity.TEAM_ID);
         byte[] bytesOut = stringOut.getBytes();
 
         NdefRecord ndefRecordOut = new NdefRecord(
@@ -139,6 +160,4 @@ public class TeamActivity extends AppCompatActivity
         NdefMessage ndefMessageout = new NdefMessage(ndefRecordOut);
         return ndefMessageout;
     }
-
-
 }

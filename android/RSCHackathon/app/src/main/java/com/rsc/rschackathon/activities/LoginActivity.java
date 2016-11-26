@@ -40,13 +40,13 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.login_activity_login_button)
     public void loginClicked() {
-       startActivity(new Intent(LoginActivity.this, RecyclerViewActivity.class));
+        startActivity(TeamActivity.createIntent(this));
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-
+/*
         networkService = new NetworkService();
         Call<List<DocsApi>> call = networkService.getAPI().getRepositories();
         call.enqueue(new Callback<List<DocsApi>>() {
@@ -59,6 +59,6 @@ public class LoginActivity extends AppCompatActivity {
             public void onFailure(Call<List<DocsApi>> call, Throwable t) {
                 Log.i("TAG", "fail");
             }
-        });
+        });*/
     }
 }

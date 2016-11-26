@@ -36,7 +36,7 @@ Route::group(['prefix'=> '/api'], function() {
         Route::post('/team', 'API\Teams\TeamsController@create');
         Route::post('/team/join', 'API\Teams\TeamsController@joinTeam');
         Route::get('/event/{eventId}/question', 'API\Events\GameController@getCurrentQuestion');
-        Route::post('/event/{eventId}/answer/{answerId}', 'API\Events\GameController@answer');
+        Route::post('/answer', 'API\Events\GameController@answer');
 
     });
 });

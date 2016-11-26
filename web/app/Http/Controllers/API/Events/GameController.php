@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\API\Events;
 
+use App\Answer;
 use App\Enum\EventStatusEnum;
 use App\Event;
 use App\Http\Controllers\API\BaseApiController;
@@ -10,6 +11,7 @@ use App\Http\Response\APIResponse;
 use App\Question;
 use App\TeamMember;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class GameController extends BaseApiController
 {
@@ -27,9 +29,19 @@ class GameController extends BaseApiController
     }
 
 
-    public function answer($eventId, $answerId)
+    public function answer(Request $request)
     {
-        //$member = TeamMember::where('event_id')
-        // ToDo: implement
+        $teamId = $request->get('team_id');
+        $answerId = $request->get('answer_id');
+        $answer = Answer::find($answerId);
+
+        if($answer->correct) {
+            $member = TeamMember::where('team_id', $teamId)
+                ->where('user_id', $this->getUser($request)->id)
+                ->first();
+            $member->score++;
+            $member->save();
+        }
+        return new APIResponse(200);
     }
 }

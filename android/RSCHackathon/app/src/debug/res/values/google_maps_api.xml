@@ -1,7 +1,5 @@
 <resources>
     <!--
-    TODO: Before you run your application, you need a Google Maps API key.
-
     To get one, follow this link, follow the directions and press "Create" at the end:
 
     https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=AE:03:35:02:CD:4C:F8:72:FB:38:D8:5D:DC:AB:BD:D2:D4:8F:FB:F0%3Bcom.rsc.rschackathon.activities

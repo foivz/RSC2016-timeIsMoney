@@ -40,6 +40,13 @@ public class CreateTeamActivity extends AppCompatActivity {
     @OnClick(R.id.create_team_button)
     public void createTeam() {
 
+
+
+
+
+
+
+
         NetworkService networkService = new NetworkService();
         Call<CreateTeamApi> call = networkService.getAPI().createTeam(MainActivity.API_KEY, 1, teamNameEditText.getText().toString());
         call.enqueue(new Callback<CreateTeamApi>() {
@@ -50,7 +57,7 @@ public class CreateTeamActivity extends AppCompatActivity {
                     Log.i("TAG", response.message());
                     if (response.body().isSuccess()) {
                         TEAM_ID = response.body().getData().getId();
-                        startActivity(ServerTeamActivity.createIntent(CreateTeamActivity.this));
+                        startActivity(ServerTeamActivity.createIntent(CreateTeamActivity.this).putExtra("id", 100));
                     }
                 }
             }

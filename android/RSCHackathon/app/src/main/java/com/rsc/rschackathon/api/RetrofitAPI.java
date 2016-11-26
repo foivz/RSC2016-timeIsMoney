@@ -1,8 +1,10 @@
 package com.rsc.rschackathon.api;
 
+import com.rsc.rschackathon.api.models.AddTeamMemberApi;
 import com.rsc.rschackathon.api.models.CreateTeamApi;
 import com.rsc.rschackathon.api.models.CurrentEvent;
 import com.rsc.rschackathon.api.models.DocsApi;
+import com.rsc.rschackathon.api.models.GetTeamMembersAPI;
 import com.rsc.rschackathon.api.models.LoginResponse;
 
 import java.util.List;
@@ -13,6 +15,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 public interface RetrofitAPI {
 
@@ -32,10 +35,13 @@ public interface RetrofitAPI {
     @FormUrlEncoded
     @POST("/api/team")
     public Call<CreateTeamApi> createTeam(@Header("X-Authorization") String apyKey, @Field("event_id") int eventId,
-                                          @Field("team_name") String teamName);
+            @Field("team_name") String teamName);
+
+    @GET("/api/team/{team_id}/members")
+    public Call<GetTeamMembersAPI> getTeamMembers(@Path("team_id") int id, @Header("X-Authorization") String apyKey);
 
     @FormUrlEncoded
-    @POST("/api/team")
-    public Call<CreateTeamApi> addTeamMembers(@Header("X-Authorization") String apyKey, @Field("team_id") int teamId,
-                                              @Field("user_id") int userId);
+    @POST("/api/team/join")
+    public Call<AddTeamMemberApi> addTeamMembers(@Header("X-Authorization") String apyKey, @Field("team_id") int teamId,
+            @Field("user_id") int userId);
 }

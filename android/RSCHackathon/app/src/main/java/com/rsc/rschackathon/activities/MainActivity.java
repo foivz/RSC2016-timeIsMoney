@@ -41,7 +41,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    public static int ID;
     public static String API_KEY;
     private static final int RC_SIGN_IN = 9001;
 
@@ -132,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         } else {
                             String APIKEY = response.body().getData().getApi_key();
                             API_KEY = APIKEY;
+                            ID = response.body().getData().getId();
                             Log.i("TAG", "on response " + APIKEY);/*
                             writeTokenToSharedPreferences(response.body().getData().getApiKey());
 
@@ -247,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
                             if (response.body() != null) {
                                 Log.i("TAG", "google apykey " + response.body().getData().getApi_key());
                                 API_KEY =  response.body().getData().getApi_key();
+                                ID = response.body().getData().getId();
                                 /*mainActivity.writeTokenToSharedPreferences(response.body().getData().getApiKey());
                                 Call<User> userCall = mainActivity.networkService.getAPI().getUser(response.body().getData().getApiKey());
                                 userCall.enqueue(new Callback<User>() {

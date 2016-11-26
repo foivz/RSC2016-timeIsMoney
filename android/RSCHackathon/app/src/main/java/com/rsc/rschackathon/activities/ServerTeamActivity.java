@@ -2,6 +2,8 @@ package com.rsc.rschackathon.activities;
 
 import com.rsc.rschackathon.R;
 import com.rsc.rschackathon.adapters.TeamListAdapter;
+import com.rsc.rschackathon.api.NetworkService;
+import com.rsc.rschackathon.api.models.GetTeamMembersAPI;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
 import android.nfc.NfcEvent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,8 +27,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback, TeamListAdapter.Listener {
+public class ServerTeamActivity extends AppCompatActivity
+        implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback, TeamListAdapter.Listener {
 
     TextView textInfo;
 
@@ -42,6 +49,12 @@ public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.
     @BindView(R.id.team_list)
     RecyclerView teamList;
 
+    Thread thread;
+
+    NetworkService networkService;
+
+    private Handler handler = new Handler();
+
     public static Intent createIntent(final Context context) {
         return new Intent(context, ServerTeamActivity.class).putExtra("id", 100);
     }
@@ -50,8 +63,34 @@ public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_server_team);
-
+        networkService = new NetworkService();
         ButterKnife.bind(this);
+
+        thread = new Thread() {
+            public void run() {
+
+                Call<GetTeamMembersAPI> call = networkService.getAPI()
+                        .getTeamMembers(CreateTeamActivity.TEAM_ID, MainActivity.API_KEY);
+                call.enqueue(new Callback<GetTeamMembersAPI>() {
+                    @Override
+                    public void onResponse(Call<GetTeamMembersAPI> call, Response<GetTeamMembersAPI> response) {
+                        if (response != null) {
+                            teamMateovi.clear();
+                            for (int i = 0; i < response.body().getData().size(); i++) {
+                                teamMateovi.add(response.body().getData().get(i).getName());
+                            }
+                            recyclerViewAdapter.setData(teamMateovi);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<GetTeamMembersAPI> call, Throwable t) {
+                        Log.i("TAG", t.getMessage());
+                    }
+                });
+                handler.postDelayed(this, 1000);
+            }
+        };
 
         if (teamMateovi == null) {
             teamMateovi = new ArrayList<>();
@@ -89,6 +128,10 @@ public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.
     protected void onResume() {
         super.onResume();
 
+        handler.removeCallbacks(thread);
+        handler.postDelayed(thread, 0);
+        Log.d("TAG", "onResume");
+
         Intent intent = getIntent();
         if (intent != null) {
             if (intent.getIntExtra("id", 0) == 0) {
@@ -117,6 +160,7 @@ public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.
     protected void onPause() {
         super.onPause();
 
+        handler.removeCallbacks(thread);
         NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         nfcAdapter.disableForegroundDispatch(this);
     }
@@ -132,6 +176,7 @@ public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.
                 Toast.makeText(getApplicationContext(),
                         eventString,
                         Toast.LENGTH_LONG).show();
+
             }
         });
 
@@ -139,14 +184,6 @@ public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-
-
-
-
-
-
-
-
 
         String stringOut = String.valueOf(CreateTeamActivity.TEAM_ID);
         byte[] bytesOut = stringOut.getBytes();
@@ -158,6 +195,7 @@ public class ServerTeamActivity extends AppCompatActivity implements NfcAdapter.
                 bytesOut);
 
         NdefMessage ndefMessageout = new NdefMessage(ndefRecordOut);
+
         return ndefMessageout;
     }
 }

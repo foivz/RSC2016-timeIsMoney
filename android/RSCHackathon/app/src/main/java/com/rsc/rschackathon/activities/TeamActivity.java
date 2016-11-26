@@ -36,9 +36,9 @@ public class TeamActivity extends AppCompatActivity
         implements NfcAdapter.CreateNdefMessageCallback, TeamListAdapter.Listener, NfcAdapter.OnNdefPushCompleteCallback {
 
 
-    TextView textInfo;
-
-    EditText textOut;
+//    TextView textInfo;
+//
+//    EditText textOut;
 
     TeamListAdapter recyclerViewAdapter;
 
@@ -72,8 +72,8 @@ public class TeamActivity extends AppCompatActivity
             teamMateovi = new ArrayList<>();
             Log.i("TAG", "ONCREATE");
         }
-        textInfo = (TextView) findViewById(R.id.info);
-        textOut = (EditText) findViewById(R.id.textout);
+//        textInfo = (TextView) findViewById(R.id.info);
+//        textOut = (EditText) findViewById(R.id.textout);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             Toast.makeText(this,
@@ -93,6 +93,10 @@ public class TeamActivity extends AppCompatActivity
         teamList.setLayoutManager(linearLayoutManager);
         recyclerViewAdapter.setListener(this);
         teamList.setAdapter(recyclerViewAdapter);
+
+        getSupportActionBar().setTitle("Team members");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
 
@@ -216,7 +220,8 @@ public class TeamActivity extends AppCompatActivity
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
 
-        String stringOut = textOut.getText().toString();
+//        String stringOut = textOut.getText().toString();
+        String stringOut = "aaa";
         byte[] bytesOut = stringOut.getBytes();
 
         NdefRecord ndefRecordOut = new NdefRecord(

@@ -34,9 +34,9 @@ import retrofit2.Response;
 public class ServerTeamActivity extends AppCompatActivity
         implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback, TeamListAdapter.Listener {
 
-    TextView textInfo;
-
-    EditText textOut;
+//    TextView textInfo;
+//
+//    EditText textOut;
 
     TeamListAdapter recyclerViewAdapter;
 
@@ -96,8 +96,8 @@ public class ServerTeamActivity extends AppCompatActivity
             teamMateovi = new ArrayList<>();
             Log.i("TAG", "ONCREATE");
         }
-        textInfo = (TextView) findViewById(R.id.info);
-        textOut = (EditText) findViewById(R.id.textout);
+//        textInfo = (TextView) findViewById(R.id.info);
+//        textOut = (EditText) findViewById(R.id.textout);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
             Toast.makeText(this,
@@ -117,6 +117,10 @@ public class ServerTeamActivity extends AppCompatActivity
         teamList.setLayoutManager(linearLayoutManager);
         recyclerViewAdapter.setListener(this);
         teamList.setAdapter(recyclerViewAdapter);
+
+        getSupportActionBar().setTitle("Team members");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
 
@@ -144,7 +148,7 @@ public class ServerTeamActivity extends AppCompatActivity
                     String inMsg = new String(NdefRecord_0.getPayload());
                     teamMateovi.add(inMsg);
                     recyclerViewAdapter.setData(teamMateovi);
-                    textInfo.setText(inMsg);
+//                    textInfo.setText(inMsg);
                 }
             }
         }
@@ -184,6 +188,13 @@ public class ServerTeamActivity extends AppCompatActivity
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
+
+
+
+
+
+
+
 
         String stringOut = String.valueOf(CreateTeamActivity.TEAM_ID);
         byte[] bytesOut = stringOut.getBytes();

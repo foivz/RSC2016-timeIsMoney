@@ -35,17 +35,14 @@ public class CreateTeamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_team);
 
         ButterKnife.bind(this);
+
+        getSupportActionBar().setTitle("Create new team");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @OnClick(R.id.create_team_button)
     public void createTeam() {
-
-
-
-
-
-
-
 
         NetworkService networkService = new NetworkService();
         Call<CreateTeamApi> call = networkService.getAPI().createTeam(MainActivity.API_KEY, 1, teamNameEditText.getText().toString());
@@ -57,7 +54,7 @@ public class CreateTeamActivity extends AppCompatActivity {
                     Log.i("TAG", response.message());
                     if (response.body().isSuccess()) {
                         TEAM_ID = response.body().getData().getId();
-                        startActivity(ServerTeamActivity.createIntent(CreateTeamActivity.this).putExtra("id", 100));
+                        startActivity(ServerTeamActivity.createIntent(CreateTeamActivity.this));
                     }
                 }
             }

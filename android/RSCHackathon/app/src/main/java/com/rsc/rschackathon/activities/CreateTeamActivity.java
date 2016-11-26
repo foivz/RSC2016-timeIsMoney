@@ -44,26 +44,29 @@ public class CreateTeamActivity extends AppCompatActivity {
     @OnClick(R.id.create_team_button)
     public void createTeam() {
 
-        NetworkService networkService = new NetworkService();
-        Call<CreateTeamApi> call = networkService.getAPI().createTeam(MainActivity.API_KEY, 1, teamNameEditText.getText().toString());
-        call.enqueue(new Callback<CreateTeamApi>() {
-            @Override
-            public void onResponse(Call<CreateTeamApi> call, Response<CreateTeamApi> response) {
-                Log.i("TAG", "response");
-                if (response.isSuccessful()) {
-                    Log.i("TAG", response.message());
-                    if (response.body().isSuccess()) {
-                        TEAM_ID = response.body().getData().getId();
-                        startActivity(ServerTeamActivity.createIntent(CreateTeamActivity.this));
-                    }
-                }
-            }
+        //TODO TINOS CODE UNCOMMENCT AFTER
+//        NetworkService networkService = new NetworkService();
+//        Call<CreateTeamApi> call = networkService.getAPI().createTeam(MainActivity.API_KEY, 1, teamNameEditText.getText().toString());
+//        call.enqueue(new Callback<CreateTeamApi>() {
+//            @Override
+//            public void onResponse(Call<CreateTeamApi> call, Response<CreateTeamApi> response) {
+//                Log.i("TAG", "response");
+//                if (response.isSuccessful()) {
+//                    Log.i("TAG", response.message());
+//                    if (response.body().isSuccess()) {
+//                        TEAM_ID = response.body().getData().getId();
+//                        startActivity(ServerTeamActivity.createIntent(CreateTeamActivity.this));
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<CreateTeamApi> call, Throwable t) {
+//                Log.i("TAG", t.getMessage());
+//            }
+//        });
 
-            @Override
-            public void onFailure(Call<CreateTeamApi> call, Throwable t) {
-                Log.i("TAG", t.getMessage());
-            }
-        });
+        startActivity(new Intent(CreateTeamActivity.this, QuestionActivity.class));
 
     }
 }

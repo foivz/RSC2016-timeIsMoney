@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\API\APIResponse;
+use App\Http\Response\APIResponse;
 use App\User;
 use Closure;
 
@@ -20,10 +20,10 @@ class AuthenticateAPI
     {
         $apiKey = $request->header('X-Authorization');
         if ($apiKey == null) {
-            return new APIResponse(401, [], ['X-Authorization header not found.']);
+            return response('X-Authorization header not found.', 401);
         }
         if (User::where('api_key', $apiKey)->first() == null) {
-            return new APIResponse(401, [], ['User with the API key not found.']);
+            return response('User with the API key not found.', 401);
         }
 
         return $next($request);

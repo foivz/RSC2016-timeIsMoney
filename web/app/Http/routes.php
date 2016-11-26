@@ -15,7 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::auth();
+// Social
+Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider')
+    ->name('socialAuth');
+Route::get('auth/{provider}/check', 'Auth\AuthController@handleProviderCallback')
+    ->name('socialAuthCallback');
+Route::get('/login', 'Auth\AuthController@login');
+Route::get('/logout', 'Auth\AuthController@logout');
 
 // Mobile
 Route::group(['prefix'=> '/api'], function() {
@@ -25,7 +31,15 @@ Route::group(['prefix'=> '/api'], function() {
     Route::get('/events/current', 'API\Events\EventsController@listCurrent');
 
     Route::group(['middleware'=> 'auth.api'], function() {
+        Route::get('/team/{id}/members', 'API\Teams\TeamsController@getTeamMembers');
         Route::post('/team', 'API\Teams\TeamsController@create');
         Route::post('/team/join', 'API\Teams\TeamsController@joinTeam');
     });
+});
+
+Route::group(['middleware' => ['web', 'auth']], function() {
+    Route::resource('moderator/event', 'Moderator\\EventController');
+    Route::resource('moderator/quiz', 'Moderator\\QuizController');
+    Route::resource('moderator/question', 'Moderator\\QuestionController');
+    Route::resource('moderator/answer', 'Moderator\\AnswerController');
 });

@@ -55,4 +55,13 @@ class TeamsController extends BaseApiController
         return new APIResponse(200);
     }
 
+    public function getTeamMembers($id)
+    {
+        $team = Team::find($id);
+        if($team === null) {
+            return new APIResponse(404, [], [], ["Team not found."]);
+        }
+        return new APIResponse(200, $team->members);
+    }
+
 }

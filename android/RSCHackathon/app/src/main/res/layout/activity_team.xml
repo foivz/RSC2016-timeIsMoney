@@ -12,22 +12,31 @@
         tools:context="com.rsc.rschackathon.activities.TeamActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/team_list"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbarStyle="insideOverlay"
-        android:layout_above="@+id/activity_team_play"
-        android:scrollbars="none" />
+            android:id="@+id/team_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/activity_team_play"
+            android:scrollbarStyle="insideOverlay"
+            android:scrollbars="none"/>
 
     <Button
-        android:id="@+id/activity_team_play"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/round_corners_blue"
-        android:text="Let's play!"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
+            android:id="@+id/activity_team_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/round_corners_blue"
+            android:text="Let's play!"
+            android:textAllCaps="false"
+            android:visibility="gone"
+            android:textColor="@color/white"/>
+
+    <!--  <TextView
+              android:id="@+id/team_mates_numbers"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:layout_alignParentBottom="true"
+              android:layout_centerHorizontal="true"
+              android:textColor="#2196f3"/>-->
 
 </RelativeLayout>

@@ -18,8 +18,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -34,10 +32,6 @@ import retrofit2.Response;
 public class ServerTeamActivity extends AppCompatActivity
         implements NfcAdapter.CreateNdefMessageCallback, NfcAdapter.OnNdefPushCompleteCallback, TeamListAdapter.Listener {
 
-//    TextView textInfo;
-//
-//    EditText textOut;
-
     TeamListAdapter recyclerViewAdapter;
 
     private static List<String> teamMateovi;
@@ -48,6 +42,9 @@ public class ServerTeamActivity extends AppCompatActivity
 
     @BindView(R.id.team_list)
     RecyclerView teamList;
+
+  //  @BindView(R.id.team_mates_numbers)
+   // TextView numbers;
 
     Thread thread;
 
@@ -65,6 +62,7 @@ public class ServerTeamActivity extends AppCompatActivity
         setContentView(R.layout.activity_server_team);
         networkService = new NetworkService();
         ButterKnife.bind(this);
+        //numbers.setText("1/"+ brojIgraca + " players");
 
         thread = new Thread() {
             public void run() {
@@ -74,12 +72,15 @@ public class ServerTeamActivity extends AppCompatActivity
                 call.enqueue(new Callback<GetTeamMembersAPI>() {
                     @Override
                     public void onResponse(Call<GetTeamMembersAPI> call, Response<GetTeamMembersAPI> response) {
-                        if (response != null) {
-                            teamMateovi.clear();
+                        if (response.body() != null) {
+
+                            //Log.i("TAG", response.body().getData().get(0).getName());
+                            /*teamMateovi.clear();
                             for (int i = 0; i < response.body().getData().size(); i++) {
                                 teamMateovi.add(response.body().getData().get(i).getName());
-                            }
-                            recyclerViewAdapter.setData(teamMateovi);
+                            }*/
+                            recyclerViewAdapter.setData(response.body().getData());
+                            //numbers.setText( response.body().getData().size()+"/"+ brojIgraca + " players");
                         }
                     }
 
@@ -111,7 +112,7 @@ public class ServerTeamActivity extends AppCompatActivity
             nfcAdapter.setOnNdefPushCompleteCallback(this, this);
         }
 
-        recyclerViewAdapter = new TeamListAdapter();
+        recyclerViewAdapter = new TeamListAdapter(this);
         linearLayoutManager = new LinearLayoutManager(this);
 
         teamList.setLayoutManager(linearLayoutManager);
@@ -146,8 +147,8 @@ public class ServerTeamActivity extends AppCompatActivity
                     NdefRecord[] inNdefRecords = inNdefMessage.getRecords();
                     NdefRecord NdefRecord_0 = inNdefRecords[0];
                     String inMsg = new String(NdefRecord_0.getPayload());
-                    teamMateovi.add(inMsg);
-                    recyclerViewAdapter.setData(teamMateovi);
+                    //  teamMateovi.add(inMsg);
+                    //  recyclerViewAdapter.setData(teamMateovi);
 //                    textInfo.setText(inMsg);
                 }
             }
@@ -188,13 +189,6 @@ public class ServerTeamActivity extends AppCompatActivity
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-
-
-
-
-
-
-
 
         String stringOut = String.valueOf(CreateTeamActivity.TEAM_ID);
         byte[] bytesOut = stringOut.getBytes();

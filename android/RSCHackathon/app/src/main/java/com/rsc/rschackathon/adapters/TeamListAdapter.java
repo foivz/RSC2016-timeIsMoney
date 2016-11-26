@@ -1,7 +1,10 @@
 package com.rsc.rschackathon.adapters;
 
 import com.rsc.rschackathon.R;
+import com.rsc.rschackathon.api.models.GetTeamMembersAPI;
+import com.squareup.picasso.Picasso;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +17,15 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.MyDevicesViewHolder> {
+
+    final Context context;
+
+    public TeamListAdapter(Context context) {
+        this.context = context;
+    }
 
     public interface Listener {
 
@@ -26,7 +36,7 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.MyDevi
 
     private Listener listener = Listener.EMPTY;
 
-    List<String> teamList = new ArrayList<>();
+    List<GetTeamMembersAPI.Data> teamList = new ArrayList<>();
 
 
     @Override
@@ -37,17 +47,23 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.MyDevi
 
     @Override
     public void onBindViewHolder(final TeamListAdapter.MyDevicesViewHolder holder, final int position) {
-        holder.teamMate.setText(teamList.get(position));
+        //Log.i("TAG", teamList.getData().get(position).getName());
+        holder.teamMate.setText(teamList.get(position).getName());
+        Picasso.with(context)
+                .load(teamList.get(position).getAvatar_url())
+                .placeholder(R.mipmap.ic_launcher)
+                .into(holder.profileIcon);
     }
 
     @Override
     public int getItemCount() {
+
         return teamList.size();
     }
 
-    public void setData(List<String> data) {
-        teamList.clear();
-        teamList.addAll(data);
+    public void setData(List<GetTeamMembersAPI.Data> data) {
+        teamList = data;
+        //Log.i("TAG", teamList.getData().get(0).getName());
         notifyDataSetChanged();
     }
 
@@ -60,6 +76,9 @@ public class TeamListAdapter extends RecyclerView.Adapter<TeamListAdapter.MyDevi
 
         @BindView(R.id.team_mate)
         protected TextView teamMate;
+
+        @BindView(R.id.user_profile_icon)
+        protected CircleImageView profileIcon;
 
         @OnClick(R.id.team_list_layout)
         public void onItemClicked(View view) {

@@ -35,9 +35,10 @@ Route::group(['prefix'=> '/api'], function() {
         Route::get('/team/{id}/members', 'API\Teams\TeamsController@getTeamMembers');
         Route::post('/team', 'API\Teams\TeamsController@create');
         Route::post('/team/join', 'API\Teams\TeamsController@joinTeam');
+        Route::get('/event/{eventId}/question', 'API\Events\GameController@getCurrentQuestion');
+        Route::post('/event/{eventId}/answer/{answerId}', 'API\Events\GameController@answer');
 
     });
-        Route::get('/event/{eventId}/question', 'Moderator\EventModerationController@getCurrentQuestion');
 });
 
 Route::group(['middleware' => ['web', 'auth']], function() {

@@ -32,19 +32,6 @@ class EventModerationController extends Controller
         return new APIResponse(200, $teams);
     }
 
-    public function getCurrentQuestion($eventId)
-    {
-        $event = Event::find($eventId);
-        if($event->status != EventStatusEnum::STATUS_FINISHED) {
-            return new APIResponse(204, [], ['Quiz is finished.']);
-        }
-        if($event->status != EventStatusEnum::STATUS_STARTED) {
-            return new APIResponse(403, [], ['Quiz not yet started.']);
-        }
-        $questions = Question::where('quiz_id', $event->quiz->id)->with('answers')->get();
-        return new APIResponse(200, $questions[$event->current_question-1]);
-    }
-
     public function startGame($eventId)
     {
         $event = Event::find($eventId);

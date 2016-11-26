@@ -15,7 +15,6 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/team_list"
         android:layout_width="match_parent"
-        android:layout_below="@+id/info"
         android:layout_height="match_parent"
         android:scrollbarStyle="insideOverlay"
         android:layout_above="@+id/activity_server_team_play"

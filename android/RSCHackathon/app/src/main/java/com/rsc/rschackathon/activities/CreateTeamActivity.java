@@ -35,6 +35,10 @@ public class CreateTeamActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_team);
 
         ButterKnife.bind(this);
+
+        getSupportActionBar().setTitle("Create new team");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
 
     @OnClick(R.id.create_team_button)

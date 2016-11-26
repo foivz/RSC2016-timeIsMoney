@@ -84,7 +84,6 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         ButterKnife.bind(this);
 
         toolbar.setTitle("Nearby events");
-        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         setSupportActionBar(toolbar);
         getSupportActionBar().setHomeButtonEnabled(false);
 
@@ -205,9 +204,8 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         joinTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(RecyclerViewActivity.this, "JOIN", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
-                startActivity(new Intent(RecyclerViewActivity.this, TeamActivity.class));
+                startActivity(new Intent(RecyclerViewActivity.this, TeamActivity.class).putExtra("id", 100));
 
             }
         });
@@ -215,7 +213,6 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         createTeam.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(RecyclerViewActivity.this, "CREATE", Toast.LENGTH_SHORT).show();
                 dialog.dismiss();
                 startActivity(new Intent(RecyclerViewActivity.this, CreateTeamActivity.class));
             }

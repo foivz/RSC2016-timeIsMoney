@@ -12,21 +12,23 @@
         tools:context="com.rsc.rschackathon.activities.ServerTeamActivity">
 
 
-    <EditText
-            android:id="@+id/textout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    <TextView
-            android:id="@+id/info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
     <android.support.v7.widget.RecyclerView
-            android:id="@+id/team_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/info"
-            android:scrollbarStyle="insideOverlay"
-            android:scrollbars="none"/>
+        android:id="@+id/team_list"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/info"
+        android:layout_height="match_parent"
+        android:scrollbarStyle="insideOverlay"
+        android:layout_above="@+id/activity_server_team_play"
+        android:scrollbars="none" />
+
+    <Button
+        android:id="@+id/activity_server_team_play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/round_corners_blue"
+        android:text="Let's play!"
+        android:textAllCaps="false"
+        android:textColor="@color/white" />
 </RelativeLayout>

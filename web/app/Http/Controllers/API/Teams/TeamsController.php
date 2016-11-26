@@ -61,7 +61,12 @@ class TeamsController extends BaseApiController
         if($team === null) {
             return new APIResponse(404, [], [], ["Team not found."]);
         }
-        return new APIResponse(200, $team->members);
+
+        $users = [];
+        foreach($team->members as $member) {
+            $users[] = $member->user;
+        }
+        return new APIResponse(200, $users);
     }
 
 }

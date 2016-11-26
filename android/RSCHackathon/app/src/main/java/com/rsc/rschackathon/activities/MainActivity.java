@@ -18,6 +18,8 @@ import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.rsc.rschackathon.R;
+import com.rsc.rschackathon.api.NetworkService;
+import com.rsc.rschackathon.api.models.LoginResponse;
 import com.rsc.rschackathon.firebase.MyFirebaseMesagingService;
 
 import android.accounts.AccountManager;
@@ -33,6 +35,9 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -64,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
         String text = getIntent().getStringExtra(MyFirebaseMesagingService.TEXT_EXTRA);
         String token = FirebaseInstanceId.getInstance().getToken();
         Log.d(TAG, "Token: " + token);
-
 
         if (text != null) {
             Log.e("CALLED", text);
@@ -110,21 +114,22 @@ public class MainActivity extends AppCompatActivity {
 
             AccessToken accessToken = loginResult.getAccessToken();
             Log.i("TAG", accessToken.getToken());
-/*
+
             if (accessToken.getToken() == null) {
                 Log.i(TAG, "Neuspješna prijava");
             } else {
-                Call<ApiResponse> call = networkService.getAPI().getApiKey(accessToken.getToken());
-                call.enqueue(new Callback<ApiResponse>() {
+                NetworkService networkService = new NetworkService();
+                Call<LoginResponse> call = networkService.getAPI().getApiKey("facebook", accessToken.getToken());
+                call.enqueue(new Callback<LoginResponse>() {
 
                     @Override
-                    public void onResponse(final Call<ApiResponse> call, final Response<ApiResponse> response) {
+                    public void onResponse(final Call<LoginResponse> call, final Response<LoginResponse> response) {
 
                         if (response.body() == null) {
-                            showMessage("Greška na serveru");
+                            Log.i("TAG", "Greška na serveru");
                         } else {
-                            Log.i("TAG", "on response " + response.body().getData().getApiKey());
-                            String API_KEY = response.body().getData().getApiKey();
+                            String API_KEY = response.body().getData().getApi_key();
+                            Log.i("TAG", "on response " + API_KEY);/*
                             writeTokenToSharedPreferences(response.body().getData().getApiKey());
 
                             Call<User> userCall = networkService.getAPI().getUser(API_KEY);
@@ -151,17 +156,17 @@ public class MainActivity extends AppCompatActivity {
                                 public void onFailure(final Call<User> call, final Throwable t) {
                                     showMessage("Neuspješno povezivanje sa serverom");
                                 }
-                            });
+                            });*/
                         }
                     }
 
                     @Override
-                    public void onFailure(final Call<ApiResponse> call, final Throwable t) {
+                    public void onFailure(final Call<LoginResponse> call, final Throwable t) {
                         Log.i("TAG", "on failure " + t.getMessage());
-                        showMessage("Neuspješno povezivanje sa serverom");
+                        Log.i("TAG", "Neuspješno povezivanje sa serverom");
                     }
                 });
-            }*/
+            }
         }
 
         @Override
@@ -227,16 +232,18 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
-            if (aBoolean) {/*
+            if (aBoolean) {
                 if (mainActivity.token != null) {
-                    Call<ApiResponse> call = mainActivity.networkService.getAPI().getApiKeyGoogle(mainActivity.token);
-                    call.enqueue(new Callback<ApiResponse>() {
+                    NetworkService networkService = new NetworkService();
+                    Call<LoginResponse> call = networkService.getAPI().getApiKey("google", mainActivity.token);
+                    call.enqueue(new Callback<LoginResponse>() {
 
                         @Override
-                        public void onResponse(final Call<ApiResponse> call, final Response<ApiResponse> response) {
-                            Log.i("TAG", "google apykey " + response.body().getData().getApiKey());
+                        public void onResponse(final Call<LoginResponse> call, final Response<LoginResponse> response) {
+
                             if (response.body() != null) {
-                                mainActivity.writeTokenToSharedPreferences(response.body().getData().getApiKey());
+                                Log.i("TAG", "google apykey " + response.body().getData().getApi_key());
+                                /*mainActivity.writeTokenToSharedPreferences(response.body().getData().getApiKey());
                                 Call<User> userCall = mainActivity.networkService.getAPI().getUser(response.body().getData().getApiKey());
                                 userCall.enqueue(new Callback<User>() {
 
@@ -259,20 +266,20 @@ public class MainActivity extends AppCompatActivity {
                                     public void onFailure(final Call<User> call, final Throwable t) {
                                         mainActivity.showMessage("Neuspješno povezivanje s serverom");
                                     }
-                                });
+                                });*/
                             } else {
-                                mainActivity.showMessage("Neuspješno povezivanje s serverom");
+                                Log.i("TAG", "Neuspješno povezivanje s serverom");
                             }
                         }
 
                         @Override
-                        public void onFailure(final Call<ApiResponse> call, final Throwable t) {
-                            mainActivity.showMessage("Neuspješno povezivanje s serverom");
+                        public void onFailure(final Call<LoginResponse> call, final Throwable t) {
+                            Log.i("TAG", "Neuspješno povezivanje s serverom");
                         }
                     });
                 } else {
-                    mainActivity.showMessage("Neuspješna priajva");
-                }*/
+                    Log.i("TAG", "Neuspješna priajva");
+                }
             }
         }
     }

@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkService {
 
-    private static String baseUrl = "http://api.androidhive.info";
+    private static String baseUrl = "http://rsc.rinkovec.com";
 
     private RetrofitAPI retrofitAPI;
 

@@ -25,5 +25,7 @@ Route::group(['prefix'=> '/api'], function() {
     Route::get('/events/current', 'API\Events\EventsController@listCurrent');
 
     Route::group(['middleware'=> 'auth.api'], function() {
+        Route::post('/team', 'API\Teams\TeamsController@create');
+        Route::post('/team/join', 'API\Teams\TeamsController@joinTeam');
     });
 });

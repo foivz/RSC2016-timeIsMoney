@@ -4,7 +4,7 @@
 namespace App\Enum;
 
 
-class QuizCategory
+class QuizCategoryEnum
 {
     const QUIZ_TECH = 0;
     const QUIZ_HISTORY = 1;

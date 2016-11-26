@@ -40,13 +40,14 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    QuizUp
                 </a>
             </div>
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/moderator/moderate') }}">Moderate</a></li>
                     <li><a href="{{ url('/moderator/event') }}">Events</a></li>
                     <li><a href="{{ url('/moderator/quiz') }}">Quizes</a></li>
                 </ul>

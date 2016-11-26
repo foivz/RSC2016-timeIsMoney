@@ -27,5 +27,8 @@ class Question extends Model
      */
     protected $fillable = ['quiz_id', 'text', 'image', 'type_id'];
 
-    
+    public function answers()
+    {
+        return $this->hasMany('App\Answer');
+    }
 }

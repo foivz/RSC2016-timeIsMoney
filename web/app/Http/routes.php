@@ -42,4 +42,5 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::resource('moderator/quiz', 'Moderator\\QuizController');
     Route::resource('moderator/question', 'Moderator\\QuestionController');
     Route::resource('moderator/answer', 'Moderator\\AnswerController');
+    Route::get('moderator/moderate', 'Moderator\\EventModerationController@listOpenQuizzes');
 });

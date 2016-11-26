@@ -14,6 +14,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('quiz_id');
             $table->tinyInteger('status')->default(0);
             $table->text('name');
             $table->text('description');

@@ -28,6 +28,7 @@ Route::group(['prefix'=> '/api'], function() {
     Route::post('/login', 'API\AuthController@login');
 
     Route::get('/events', 'API\Events\EventsController@listAll');
+    Route::get('/question/{id}', 'API\Events\EventsController@question');
     Route::get('/events/current', 'API\Events\EventsController@listCurrent');
 
     Route::group(['middleware'=> 'auth.api'], function() {
@@ -42,5 +43,8 @@ Route::group(['middleware' => ['web', 'auth']], function() {
     Route::resource('moderator/quiz', 'Moderator\\QuizController');
     Route::resource('moderator/question', 'Moderator\\QuestionController');
     Route::resource('moderator/answer', 'Moderator\\AnswerController');
+
     Route::get('moderator/moderate', 'Moderator\\EventModerationController@listOpenQuizzes');
+    Route::get('moderator/lobby/{eventId}', 'Moderator\\EventModerationController@lobby')->name('lobby');
+    Route::get('moderator/lobby/{eventId}/members', 'Moderator\\EventModerationController@getTeams')->name('lobby.teams');
 });

@@ -15,11 +15,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($quiz as $item)
+                                @foreach($event as $item)
                                     <tr>
                                         <td><b>{{ $item->name }}</b></td>
                                         <td>
-                                            <a href="{{ url('/moderator/quiz/' . $item->id) }}" class="btn btn-success btn" title="View Quiz"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Moderate</a>
+                                            <a href="{{ route('lobby', ['eventId' => $item->id]) }}" class="btn btn-success btn" title="View Quiz"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Lobby</a>
                                         </td>
                                     </tr>
                                 @endforeach

@@ -15,14 +15,13 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th> Status </th><th> Name </th><th> Description </th><th>Actions</th>
+                                        <th> Status </th><th> Name </th><th> Description </th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($event as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->status }}</td><td>{{ $item->name }}</td><td>{{ $item->description }}</td>
+                                        <td>{{ \App\Enum\EventStatusEnum::getStatusCaption($item->status) }}</td><td>{{ $item->name }}</td><td>{{ $item->description }}</td>
                                         <td>
                                             <a href="{{ url('/moderator/event/' . $item->id) }}" class="btn btn-success btn-xs" title="View Event"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                                             <a href="{{ url('/moderator/event/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Event"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>

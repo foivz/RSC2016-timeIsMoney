@@ -81,7 +81,7 @@ public class FragmentListOfQuizzes extends Fragment implements RecyclerViewAdapt
         testList.add("TEST PODATAKA 6");
         testList.add("TEST PODATAKA 6");
 
-        recyclerViewAdapter.setData(testList);
+//        recyclerViewAdapter.setData(testList);
         recyclerViewAdapter.setListener(this);
         recyclerView.setAdapter(recyclerViewAdapter);
     }

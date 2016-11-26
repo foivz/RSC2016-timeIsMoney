@@ -40,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
 
     @OnClick(R.id.login_activity_login_button)
     public void loginClicked() {
-        startActivity(TeamActivity.createIntent(this));
+        startActivity(new Intent(LoginActivity.this, RecyclerViewActivity.class));
     }
 
     @Override

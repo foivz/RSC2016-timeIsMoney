@@ -1,5 +1,6 @@
 package com.rsc.rschackathon.api;
 
+import com.rsc.rschackathon.api.models.CurrentEvent;
 import com.rsc.rschackathon.api.models.DocsApi;
 import com.rsc.rschackathon.api.models.LoginResponse;
 
@@ -19,4 +20,10 @@ public interface RetrofitAPI {
     @FormUrlEncoded
     @POST("/api/login")
     public Call<LoginResponse> getApiKey(@Field("provider") String provider, @Field("access_token") String accessToken);
+
+    @GET("/api/events/current")
+    Call<CurrentEvent> getCurrentEvents();
+
+    @GET("/api/events")
+    Call<CurrentEvent> getAllEvents();
 }

@@ -18,8 +18,8 @@ class CreateEventsTable extends Migration
             $table->text('name');
             $table->text('description');
             $table->text('location');
-            $table->float('lat',3,7);
-            $table->float('lng',3,7);
+            $table->double('lat',7,7);
+            $table->double('lng',7,7);
             $table->integer('team_members');
             $table->dateTime('start_at');
             $table->timestamps();

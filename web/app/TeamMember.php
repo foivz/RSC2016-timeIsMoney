@@ -14,4 +14,8 @@ class TeamMember extends Model
     protected $fillable = [
         'team_id', 'user_id'
     ];
+
+   public function user() {
+       return $this->hasOne('App\User');
+   }
 }

@@ -15,14 +15,13 @@
                             <table class="table table-borderless">
                                 <thead>
                                     <tr>
-                                        <th>ID</th><th> Name </th><th> Category </th><th> Description </th><th>Actions</th>
+                                        <th> Name </th><th> Category </th><th> Description </th><th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($quiz as $item)
                                     <tr>
-                                        <td>{{ $item->id }}</td>
-                                        <td>{{ $item->name }}</td><td>{{ $item->category }}</td><td>{{ $item->description }}</td>
+                                        <td>{{ $item->name }}</td><td class=" label-warning">{{ \App\Enum\QuizCategoryEnum::getStatusCaption($item->category) }}</td><td>{{ $item->description }}</td>
                                         <td>
                                             <a href="{{ url('/moderator/quiz/' . $item->id) }}" class="btn btn-success btn-xs" title="View Quiz"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                                             <a href="{{ url('/moderator/quiz/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Quiz"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>

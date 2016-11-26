@@ -13,6 +13,7 @@ class EventSeeder extends Seeder
     {
         \App\Event::create([
             'name' => 'Halloween Quiz',
+            'quiz_id' => 1,
             'location' => 'Old City Pub',
             'lat' => 46.3095798,
             'lng' => 16.337831,
@@ -24,6 +25,7 @@ class EventSeeder extends Seeder
 
         \App\Event::create([
             'name' => 'Baroque Quiz',
+            'quiz_id' => 1,
             'location' => 'Ritz Cafe Bar',
             'lat' => 46.3080559,
             'lng' => 16.3352782,
@@ -35,6 +37,7 @@ class EventSeeder extends Seeder
 
         \App\Event::create([
             'name' => 'Office Quiz',
+            'quiz_id' => 1,
             'location' => 'The Office Bar',
             'lat' => 46.3084121,
             'lng' => 16.3357846,
@@ -46,6 +49,7 @@ class EventSeeder extends Seeder
 
         \App\Event::create([
             'name' => 'Eat, Quiz, Repeat',
+            'quiz_id' => 1,
             'location' => 'Restaurant Angelus',
             'lat' => 46.3070178,
             'lng' => 16.3364633,
@@ -56,6 +60,7 @@ class EventSeeder extends Seeder
 
         \App\Event::create([
             'name' => 'Park & Quiz',
+            'quiz_id' => 1,
             'location' => 'Restaurant Park',
             'lat' => 46.3077495,
             'lng' => 16.3405937,

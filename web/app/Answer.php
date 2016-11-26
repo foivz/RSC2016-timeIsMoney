@@ -25,7 +25,7 @@ class Answer extends Model
      *
      * @var array
      */
-    protected $fillable = ['question_id', 'payload'];
+    protected $fillable = ['question_id', 'payload', 'correct'];
 
     
 }

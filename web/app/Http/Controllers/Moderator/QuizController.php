@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Moderator;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Question;
 use App\Quiz;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -79,8 +80,9 @@ class QuizController extends Controller
     public function edit($id)
     {
         $quiz = Quiz::findOrFail($id);
+        $questions = Question::where('quiz_id', $quiz->id)->get();
 
-        return view('moderator.quiz.edit', compact('quiz'));
+        return view('moderator.quiz.edit', compact('quiz'))->with('questions', $questions);
     }
 
     /**

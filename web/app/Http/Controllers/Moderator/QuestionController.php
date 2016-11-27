@@ -49,7 +49,7 @@ class QuestionController extends Controller
 
         Session::flash('flash_message', 'Question added!');
 
-        return redirect('moderator/question');
+        return back();
     }
 
     /**
@@ -76,6 +76,7 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $question = Question::findOrFail($id);
+
 
         return view('moderator.question.edit', compact('question'));
     }

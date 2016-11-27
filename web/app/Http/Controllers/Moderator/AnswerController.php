@@ -49,7 +49,7 @@ class AnswerController extends Controller
 
         Session::flash('flash_message', 'Answer added!');
 
-        return redirect('moderator/answer');
+        return back();
     }
 
     /**

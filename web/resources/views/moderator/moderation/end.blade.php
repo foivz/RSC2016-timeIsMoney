@@ -38,7 +38,7 @@
                 success: function(raw) {
                     var content = "";
                     $.each(raw.data, function (key, team) {
-                        content += '<tr><td>'+key+'</td><td>'+team.team_name+'</td><td>'+team.score_sum+'</td></tr>';
+                        content += '<tr><td>'+(key+1)+'</td><td>'+team.team_name+'</td><td>'+team.score_sum+'</td></tr>';
                         console.log(content);
                     });
                     console.log(content);

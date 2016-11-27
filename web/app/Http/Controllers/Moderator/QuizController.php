@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Quiz;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Session;
 
 class QuizController extends Controller
@@ -45,7 +46,9 @@ class QuizController extends Controller
         
         $requestData = $request->all();
         
-        Quiz::create($requestData);
+        $quiz = Quiz::create($requestData);
+        $quiz->user_id = Auth::user()->id;
+        $quiz->save();
 
         Session::flash('flash_message', 'Quiz added!');
 

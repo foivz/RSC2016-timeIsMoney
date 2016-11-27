@@ -31,7 +31,7 @@
                         if(team.members.length == {{ $event->team_members }}) {
                             style = ' style="background-color: #b4d690"';
                         }
-                        content += '<div class="well"'+style+'><div style="font-size: 2em;"><b>Team name: </b>' + team.team_name + '</div>';
+                        content += '<div class="well lobby-user"'+style+'><div style="font-size: 2em;"><b>Team name: </b>' + team.team_name + '</div>';
                         $.each(team.members, function (key, member) {
                             content += '<div style="text-align: center; display: inline-block;"><img src="' + member.avatar_url + '"/><p>'+ member.name +'</p></div>';
                         });

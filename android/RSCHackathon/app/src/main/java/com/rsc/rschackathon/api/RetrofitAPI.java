@@ -9,6 +9,7 @@ import com.rsc.rschackathon.api.models.GetTeamMembersAPI;
 import com.rsc.rschackathon.api.models.LoginResponse;
 import com.rsc.rschackathon.api.models.Question;
 import com.rsc.rschackathon.api.models.QustionAPIModel;
+import com.rsc.rschackathon.api.models.TeamResult;
 
 import java.util.List;
 
@@ -63,4 +64,7 @@ public interface RetrofitAPI {
     @POST("/api/tiebreaker")
     public Call<AnswerQuestionModel> tieBreaker(@Header("X-Authorization") String apyKey, @Field("team_id") int teamId,
             @Field("score") int score);
+
+    @GET("/api/event/{event_id}/scoreboard")
+    Call<TeamResult> getResults(@Path("event_id") int eventId);
 }

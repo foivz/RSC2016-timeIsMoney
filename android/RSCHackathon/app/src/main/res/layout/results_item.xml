@@ -1,51 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="20dp">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/position"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@drawable/gold" />
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:src="@drawable/gold"/>
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="6dp"
-        android:textColor="@android:color/black"
-        android:textSize="17sp"
-        android:visibility="gone"
-        tools:text="4" />
+            android:id="@+id/text_position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:textColor="@android:color/black"
+            android:textSize="17sp"
+            android:visibility="gone"
+            tools:text="4"/>
 
     <TextView
-        android:id="@+id/team_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_toLeftOf="@+id/score"
-        android:layout_toRightOf="@+id/position"
-        android:textSize="18sp"
-        tools:text="Time is money" />
+            android:id="@+id/team_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_toLeftOf="@+id/score"
+            android:layout_toRightOf="@+id/position"
+            android:textSize="18sp"
+            tools:text="Time is money"/>
 
     <View
-        android:id="@+id/line"
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/team_name"
-        android:layout_marginTop="15dp"
-        android:background="#d8d8d8"
-        android:visibility="gone"></View>
+            android:id="@+id/line"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/team_name"
+            android:layout_marginTop="15dp"
+            android:background="#d8d8d8"
+            android:visibility="gone"></View>
 
     <TextView
-        android:id="@+id/score"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textSize="18sp"
-        tools:text="946" />
+            android:id="@+id/score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="18sp"
+            tools:text="946"/>
 
 </RelativeLayout>

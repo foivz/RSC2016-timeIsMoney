@@ -1,15 +1,14 @@
 package com.rsc.rschackathon.adapters;
 
+import com.rsc.rschackathon.R;
+import com.rsc.rschackathon.api.models.HighScore;
+
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import com.rsc.rschackathon.R;
-import com.rsc.rschackathon.api.models.HighScore;
-import com.rsc.rschackathon.api.models.TeamResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,31 +31,31 @@ public class HighScoreAdapter extends RecyclerView.Adapter<HighScoreAdapter.High
     @Override
     public void onBindViewHolder(final HighScoreAdapter.HighScoreViewHolder holder, final int position) {
             if(position == 0){
-                holder.teamPosition.setBackground(context.getResources().getDrawable(R.drawable.gold));
-                holder.teamPositionText.setVisibility(View.GONE);
-                holder.teamName.setText(teamList.get(position).getName());
-                holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
-                holder.line.setVisibility(View.GONE);
-            }else if(position == 1){
-                holder.teamPosition.setBackground(context.getResources().getDrawable(R.drawable.silver));
-                holder.teamPositionText.setVisibility(View.GONE);
-                holder.teamName.setText(teamList.get(position).getName());
-                holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
-                holder.line.setVisibility(View.GONE);
-            }else if(position == 2){
-                holder.teamPosition.setBackground(context.getResources().getDrawable(R.drawable.bronze));
-                holder.teamPositionText.setVisibility(View.GONE);
-                holder.teamName.setText(teamList.get(position).getName());
-                holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
-                holder.line.setVisibility(View.VISIBLE);
-            }else{
-                holder.teamPosition.setVisibility(View.INVISIBLE);
-                holder.teamPositionText.setVisibility(View.VISIBLE);
-                holder.teamPositionText.setText(String.valueOf(position + 1));
-                holder.teamName.setText(teamList.get(position).getName());
-                holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
-                holder.line.setVisibility(View.GONE);
-            }
+            holder.teamPosition.setBackground(context.getResources().getDrawable(R.drawable.gold));
+            holder.teamPositionText.setVisibility(View.GONE);
+            holder.teamName.setText(teamList.get(position).getName());
+            holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
+            holder.line.setVisibility(View.GONE);
+        }else if(position == 1){
+            holder.teamPosition.setBackground(context.getResources().getDrawable(R.drawable.silver));
+            holder.teamPositionText.setVisibility(View.GONE);
+            holder.teamName.setText(teamList.get(position).getName());
+            holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
+            holder.line.setVisibility(View.GONE);
+        }else if(position == 2){
+            holder.teamPosition.setBackground(context.getResources().getDrawable(R.drawable.bronze));
+            holder.teamPositionText.setVisibility(View.GONE);
+            holder.teamName.setText(teamList.get(position).getName());
+            holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
+            holder.line.setVisibility(View.VISIBLE);
+        }else{
+            holder.teamPosition.setVisibility(View.INVISIBLE);
+            holder.teamPositionText.setVisibility(View.VISIBLE);
+            holder.teamPositionText.setText(String.valueOf(position + 1));
+            holder.teamName.setText(teamList.get(position).getName());
+            holder.teamScore.setText(String.valueOf(teamList.get(position).getScore()));
+            holder.line.setVisibility(View.GONE);
+        }
     }
 
     @Override

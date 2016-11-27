@@ -53,6 +53,7 @@ class EventModerationController extends Controller
     {
         $event = Event::find($eventId);
         $event->status = EventStatusEnum::STATUS_FINISHED;
+        $event->save();
         return "ended";
     }
 }

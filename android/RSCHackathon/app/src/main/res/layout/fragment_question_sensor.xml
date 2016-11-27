@@ -1,0 +1,56 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/intro_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/phone"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="30dp"
+            android:text="When time runs down SHAKE your phone!"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="28sp"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/begin_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="You are in draw round, prepare for extra challenge!"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="32sp" />
+
+        <ImageView
+            android:id="@+id/phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/phone"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/text_shake"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/phone"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="30dp"
+            android:text="05:05:05"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="32sp"
+            android:visibility="gone" />
+    </RelativeLayout>
+</FrameLayout>

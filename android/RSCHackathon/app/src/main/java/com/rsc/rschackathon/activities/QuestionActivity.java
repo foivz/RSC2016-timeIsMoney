@@ -18,6 +18,7 @@ import android.widget.Button;
 import com.rsc.rschackathon.R;
 import com.rsc.rschackathon.api.NetworkService;
 import com.rsc.rschackathon.api.models.Question;
+import com.rsc.rschackathon.fragments.FragmentQuestionSensor;
 import com.rsc.rschackathon.fragments.FragmentQuestionTypeOne;
 import com.rsc.rschackathon.fragments.FragmentQuestionTypeTwo;
 
@@ -42,7 +43,12 @@ public class QuestionActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
 
-        getQuestions();
+//        getQuestions();
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentQuestionSensor questionSensor = new FragmentQuestionSensor();
+        fragmentTransaction.replace(R.id.fragment_container, questionSensor).commit();
     }
 
     private void getQuestions() {
@@ -54,14 +60,13 @@ public class QuestionActivity extends AppCompatActivity {
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 if (response.body().getType_id() == 1) {
-                        FragmentQuestionTypeOne questionTypeOne = new FragmentQuestionTypeOne();
-                        final Bundle bundle = new Bundle();
-                        Question question = response.body();
-                        bundle.putParcelable(QUESTION_DETAILS, question);
-                        questionTypeOne.setArguments(bundle);
-                        fragmentTransaction.replace(R.id.fragment_container, questionTypeOne).commit();
-                }
-                else if (response.body().getType_id() == 2) {
+                    FragmentQuestionTypeOne questionTypeOne = new FragmentQuestionTypeOne();
+                    final Bundle bundle = new Bundle();
+                    Question question = response.body();
+                    bundle.putParcelable(QUESTION_DETAILS, question);
+                    questionTypeOne.setArguments(bundle);
+                    fragmentTransaction.replace(R.id.fragment_container, questionTypeOne).commit();
+                } else if (response.body().getType_id() == 2) {
                     FragmentQuestionTypeTwo questionTypeTwo = new FragmentQuestionTypeTwo();
                     final Bundle bundle = new Bundle();
                     Question question = response.body();

@@ -212,6 +212,7 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
             public void onClick(View view) {
                 dialog.dismiss();
                 startActivity(new Intent(RecyclerViewActivity.this, CreateTeamActivity.class));
+//                startActivity(new Intent(RecyclerViewActivity.this, QuestionActivity.class));
             }
         });
 
@@ -237,6 +238,10 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         switch (item.getItemId()) {
             case R.id.search:
                 startActivity(new Intent(RecyclerViewActivity.this, MapsActivity.class));
+                break;
+            case R.id.trophy:
+                startActivity(new Intent(RecyclerViewActivity.this, HighScoreActivity.class));
+                break;
             default:
                 break;
         }

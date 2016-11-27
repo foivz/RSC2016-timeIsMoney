@@ -2,8 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/trophy"
+        android:title="@string/trophy"
+        android:icon="@drawable/trophy"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/search"
         android:title="@string/search"
         android:icon="@drawable/ic_map"
         app:showAsAction="always"/>
+
 </menu>

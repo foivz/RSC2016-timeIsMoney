@@ -8,6 +8,7 @@ import com.rsc.rschackathon.api.models.TeamResult;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,9 +30,11 @@ public class ResultsActivity extends AppCompatActivity {
     public static Intent createIntent(final Context context) {
         return new Intent(context, ResultsActivity.class);
     }
-
+    NetworkService networkService;
     @BindView(R.id.list_of_results)
     RecyclerView listOfResults;
+    Handler handler;
+    Thread thread;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,7 @@ public class ResultsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_results);
         resultsAdapter = new ResultsAdapter();
         linearLayoutManager = new LinearLayoutManager(this);
+        handler = new Handler();
 
         ButterKnife.bind(this);
 
@@ -47,22 +51,38 @@ public class ResultsActivity extends AppCompatActivity {
 
         getSupportActionBar().setTitle("Team results");
 
-        NetworkService networkService = new NetworkService();
-        Call<TeamResult> call = networkService.getAPI().getResults(RecyclerViewActivity.QUIZZ_ID);
-        call.enqueue(new Callback<TeamResult>() {
-            @Override
-            public void onResponse(Call<TeamResult> call, Response<TeamResult> response) {
-                if (response.body() != null) {
-                    resultsAdapter.setData(response.body().getData(), ResultsActivity.this);
-                }
-            }
+        networkService = new NetworkService();
 
-            @Override
-            public void onFailure(Call<TeamResult> call, Throwable t) {
-                Log.i("TAG", t.getMessage());
-            }
-        });
+        thread = new Thread() {
+            public void run() {
+                Call<TeamResult> call = networkService.getAPI().getResults(RecyclerViewActivity.QUIZZ_ID);
+                call.enqueue(new Callback<TeamResult>() {
+                    @Override
+                    public void onResponse(Call<TeamResult> call, Response<TeamResult> response) {
+                        if (response.body() != null) {
+                            resultsAdapter.setData(response.body().getData(), ResultsActivity.this);
+                        }
+                    }
 
+                    @Override
+                    public void onFailure(Call<TeamResult> call, Throwable t) {
+                        Log.i("TAG", t.getMessage());
+                    }
+                });
+
+                handler.postDelayed(this, 1000);
+            }
+        };
+        handler.removeCallbacks(thread);
+        handler.postDelayed(thread, 0);
+
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(thread);
     }
 
     @OnClick(R.id.back_to_homepage)

@@ -213,8 +213,5 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPlayer.isPlaying()) {
-            mPlayer.stop();
-        }
     }
 }

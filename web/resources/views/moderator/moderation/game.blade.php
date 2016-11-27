@@ -15,7 +15,7 @@
                                 <img src="{{ $question->image }}" />
                             @endif
                         </div>
-                        <div id="answers"></div>
+                        <div id="scoreboard"></div>
                     </div>
                 </div>
             </div>

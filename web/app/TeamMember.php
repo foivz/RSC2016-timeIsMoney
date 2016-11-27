@@ -12,7 +12,7 @@ class TeamMember extends Model
      * @var array
      */
     protected $fillable = [
-        'team_id', 'user_id'
+        'team_id', 'user_id', 'score', 'tiebreaker_score'
     ];
 
    public function user() {

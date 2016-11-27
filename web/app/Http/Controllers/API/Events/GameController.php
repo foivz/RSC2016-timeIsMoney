@@ -44,7 +44,19 @@ class GameController extends BaseApiController
             $member->score++;
             $member->save();
         }
-        return new APIResponse(200);
+        return new APIResponse(200, []);
+    }
+
+    public function tiebreaker(Request $request)
+    {
+        $teamId = $request->get('team_id');
+        $member = TeamMember::where('team_id', $teamId)
+            ->where('user_id', $this->getUser($request)->id)
+            ->first();
+
+        $member->tiebreaker_score = $request->get('score');
+        $member->save();
+        return new APIResponse(200, []);
     }
 
     public function getScore($eventId)

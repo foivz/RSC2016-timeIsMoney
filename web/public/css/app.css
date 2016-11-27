@@ -1,0 +1,31 @@
+.navbar-brand.pubuzz {
+	font-family: 'Raleway', sans-serif;
+	color: #2196F3;
+	font-weight: 700;
+}
+
+.navbar.pubuzz {
+	background-color: white;
+	padding-top: 20px;
+	margin-bottom: 0;
+}
+
+.jumbo {
+	background: url(../phone.png) center;
+	background-size: cover;
+	height: 90vh;
+	font-family: 'Raleway', sans-serif;
+	color: white;
+	font-size: 3em;
+	padding: 35vh 0 0 55vw;
+}
+
+.info {
+	padding: 60px;
+	font-family: 'Raleway', sans-serif;
+}
+
+.color-pubuzz {
+	background-color: #2196F3;
+	color: white;
+}

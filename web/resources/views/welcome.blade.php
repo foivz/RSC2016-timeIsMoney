@@ -1,17 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-10 col-md-offset-1">
-            <div class="panel panel-default">
-                <div class="panel-heading">Welcome</div>
-
-                <div class="panel-body">
-                    Your Application's Landing Page.
+    <div class="jumbo">
+        Take your pub quiz experience on a new level.
+    </div>
+    <div class="content">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="info">
+                    <h1>About Pubuzz</h1>
+                    <p>Pubuzz is an Android app made to digitalize your pub quiz experience.</p>
+                    <p>Get the app now and find your nearest pub quiz!</p>
                 </div>
             </div>
         </div>
     </div>
-</div>
 @endsection

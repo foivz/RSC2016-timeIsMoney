@@ -1,0 +1,1 @@
+There are new events available in your area. Check your Pubuzz app today!

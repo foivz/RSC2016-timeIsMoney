@@ -7,7 +7,7 @@
     3 => 'Closed',
     4 => 'Started',
     5 => 'Finished',
-], $event->status, ['class' => 'form-control']) !!}
+], ['class' => 'form-control']) !!}
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

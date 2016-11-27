@@ -6,7 +6,9 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Event;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Session;
 
 class EventController extends Controller
@@ -46,6 +48,17 @@ class EventController extends Controller
         $requestData = $request->all();
         
         Event::create($requestData);
+
+        foreach(User::all() as $user) {
+            try {
+                Mail::send('emails.events-notification', [], function ($m) use ($user) {
+                    $m->from('pubuzz@rinkovec.com', 'Pubuzz');
+                    $m->to($user->email, $user->name)->subject('New events available!');
+                });
+            }
+            catch(\Exception $e) {}
+        }
+
 
         Session::flash('flash_message', 'Event added!');
 

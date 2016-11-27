@@ -92,6 +92,8 @@ class EventModerationController extends Controller
     public function tiebreaker($eventId)
     {
         $event = Event::find($eventId);
+        $event->status = EventStatusEnum::STATUS_STARTED;
+        $event->save();
         return view('moderator.moderation.tiebreaker')
             ->with('event', $event);
     }

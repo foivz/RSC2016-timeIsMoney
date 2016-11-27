@@ -32,4 +32,12 @@
 
 .lobby-user {
 	padding: 20px 40px;
+	margin-right: 50px  !important;
+}
+
+.lobby-user img {
+	margin-right: 20px  !important;
+
+	height: 75px !important;
+	weight: 75px !important;
 }

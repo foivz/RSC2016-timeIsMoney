@@ -19,8 +19,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -87,7 +85,7 @@ public class TeamActivity extends AppCompatActivity
             nfcAdapter.setOnNdefPushCompleteCallback(this, this);
         }
 
-        recyclerViewAdapter = new TeamListAdapter();
+        recyclerViewAdapter = new TeamListAdapter(this);
         linearLayoutManager = new LinearLayoutManager(this);
 
         teamList.setLayoutManager(linearLayoutManager);
@@ -164,7 +162,7 @@ public class TeamActivity extends AppCompatActivity
                                         for (int i = 0; i < response.body().getData().size(); i++) {
                                             teamMateovi.add(response.body().getData().get(i).getName());
                                         }
-                                        recyclerViewAdapter.setData(teamMateovi);
+                                        recyclerViewAdapter.setData(response.body().getData());
                                     }
                                 }
 

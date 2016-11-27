@@ -189,7 +189,9 @@ public class RecyclerViewActivity extends AppCompatActivity implements RecyclerV
         }
 
 
-        Picasso.with(getApplicationContext()).load("http://files.softicons.com/download/holidays-icons/halloween-icon-set-by-yootheme/png/512x512/pumpkin.png").into(icon);
+//        Picasso.with(getApplicationContext()).load("http://files.softicons.com/download/holidays-icons/halloween-icon-set-by-yootheme/png/512x512/pumpkin.png").into(icon);
+        Picasso.with(getApplicationContext()).load(R.drawable.category).into(icon);
+
         name.setText(event.getName());
         location.setText(event.getLocation());
         teamMembers.setText(event.getTeam_members());

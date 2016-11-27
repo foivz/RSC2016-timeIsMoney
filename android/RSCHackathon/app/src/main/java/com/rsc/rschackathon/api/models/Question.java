@@ -77,7 +77,7 @@ public class Question implements Parcelable {
         this.answers = answers;
     }
 
-    public class Answers{
+    public static class Answers{
         int id;
         int question_id;
         String payload;

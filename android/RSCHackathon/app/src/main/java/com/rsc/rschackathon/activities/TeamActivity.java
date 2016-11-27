@@ -26,6 +26,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -59,6 +60,11 @@ public class TeamActivity extends AppCompatActivity
         return new Intent(context, TeamActivity.class).putExtra("id", 100);
     }
 
+    @OnClick(R.id.activity_team_play)
+    public void startQActivity() {
+        startActivity(new Intent(TeamActivity.this, QuestionActivity.class));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,13 +80,9 @@ public class TeamActivity extends AppCompatActivity
 //        textOut = (EditText) findViewById(R.id.textout);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
-            Toast.makeText(this,
-                    "nfcAdapter==null, no NFC adapter exists",
-                    Toast.LENGTH_LONG).show();
+
         } else {
-            Toast.makeText(this,
-                    "Set Callback(s)",
-                    Toast.LENGTH_LONG).show();
+
             nfcAdapter.setNdefPushMessageCallback(this, this);
             nfcAdapter.setOnNdefPushCompleteCallback(this, this);
         }
@@ -121,6 +123,7 @@ public class TeamActivity extends AppCompatActivity
                     NdefRecord NdefRecord_0 = inNdefRecords[0];
                     final String inMsg = new String(NdefRecord_0.getPayload());
                     Log.i("TAG", inMsg);
+                    CreateTeamActivity.TEAM_ID = Integer.parseInt(inMsg);
                     //teamMateovi.add(inMsg);
                     //recyclerViewAdapter.setData(teamMateovi);
                     //textInfo.setText(inMsg);
@@ -204,9 +207,7 @@ public class TeamActivity extends AppCompatActivity
 
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(),
-                        eventString,
-                        Toast.LENGTH_LONG).show();
+
 
 
             }

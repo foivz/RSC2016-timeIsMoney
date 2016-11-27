@@ -28,7 +28,6 @@
             android:background="@drawable/round_corners_blue"
             android:text="Let's play!"
             android:textAllCaps="false"
-            android:visibility="gone"
             android:textColor="@color/white"/>
 
     <!--  <TextView

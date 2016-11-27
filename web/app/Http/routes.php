@@ -37,8 +37,9 @@ Route::group(['prefix'=> '/api'], function() {
         Route::post('/team/join', 'API\Teams\TeamsController@joinTeam');
         Route::get('/event/{eventId}/question', 'API\Events\GameController@getCurrentQuestion');
         Route::post('/answer', 'API\Events\GameController@answer');
-
     });
+    Route::get('/event/{eventId}/scoreboard', 'API\Events\GameController@getScore')->name('event.score');
+
 });
 
 Route::group(['middleware' => ['web', 'auth']], function() {

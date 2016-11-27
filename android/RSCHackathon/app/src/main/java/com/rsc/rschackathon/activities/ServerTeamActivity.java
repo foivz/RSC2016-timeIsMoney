@@ -44,8 +44,8 @@ public class ServerTeamActivity extends AppCompatActivity
     @BindView(R.id.team_list)
     RecyclerView teamList;
 
-  //  @BindView(R.id.team_mates_numbers)
-   // TextView numbers;
+    //  @BindView(R.id.team_mates_numbers)
+    // TextView numbers;
 
     Thread thread;
 
@@ -58,7 +58,7 @@ public class ServerTeamActivity extends AppCompatActivity
     }
 
     @OnClick(R.id.activity_server_team_play)
-    public void startQActivity(){
+    public void startQActivity() {
         startActivity(new Intent(ServerTeamActivity.this, QuestionActivity.class));
     }
 
@@ -107,13 +107,8 @@ public class ServerTeamActivity extends AppCompatActivity
 //        textOut = (EditText) findViewById(R.id.textout);
         nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (nfcAdapter == null) {
-            Toast.makeText(this,
-                    "nfcAdapter==null, no NFC adapter exists",
-                    Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(this,
-                    "Set Callback(s)",
-                    Toast.LENGTH_LONG).show();
+
             nfcAdapter.setNdefPushMessageCallback(this, this);
             nfcAdapter.setOnNdefPushCompleteCallback(this, this);
         }
@@ -184,9 +179,7 @@ public class ServerTeamActivity extends AppCompatActivity
 
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext(),
-                        eventString,
-                        Toast.LENGTH_LONG).show();
+
 
             }
         });

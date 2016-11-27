@@ -13,6 +13,7 @@ import com.squareup.picasso.Picasso;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -50,6 +51,10 @@ import retrofit2.Response;
 
 public class RecyclerViewActivity extends AppCompatActivity
         implements RecyclerViewAdapter.Listener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+
+    public static Intent createIntent(final Context context) {
+        return new Intent(context, RecyclerViewActivity.class);
+    }
 
     public static final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 10;
 

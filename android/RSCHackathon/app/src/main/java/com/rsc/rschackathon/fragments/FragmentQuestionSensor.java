@@ -3,6 +3,7 @@ package com.rsc.rschackathon.fragments;
 import com.rsc.rschackathon.R;
 import com.rsc.rschackathon.activities.CreateTeamActivity;
 import com.rsc.rschackathon.activities.MainActivity;
+import com.rsc.rschackathon.activities.ResultsActivity;
 import com.rsc.rschackathon.api.NetworkService;
 import com.rsc.rschackathon.api.models.AnswerQuestionModel;
 
@@ -106,7 +107,6 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
 
             @Override
             public void onFinish() {
-                //TODO SEND TO SERVER
                 if (mPlayer.isPlaying()) {
                     mPlayer.stop();
                 }
@@ -124,6 +124,7 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
                     public void onResponse(Call<AnswerQuestionModel> call, Response<AnswerQuestionModel> response) {
                         if (response.body() != null) {
                             Log.i("TAG", "slanje tiebreakera uspjesno " + response.body().isSuccess());
+                            startActivity(ResultsActivity.createIntent(getActivity()));
                         }
                     }
 

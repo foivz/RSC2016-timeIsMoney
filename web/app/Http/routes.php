@@ -37,6 +37,7 @@ Route::group(['prefix'=> '/api'], function() {
         Route::post('/team/join', 'API\Teams\TeamsController@joinTeam');
         Route::get('/event/{eventId}/question', 'API\Events\GameController@getCurrentQuestion');
         Route::post('/answer', 'API\Events\GameController@answer');
+        Route::post('/tiebreaker', 'API\Events\GameController@tiebreaker');
     });
     Route::get('/event/{eventId}/scoreboard', 'API\Events\GameController@getScore')->name('event.score');
 
@@ -54,4 +55,6 @@ Route::group(['middleware' => ['web', 'auth']], function() {
 
     Route::get('moderator/event/{eventId}/start', 'Moderator\\EventModerationController@startGame')->name('event.start');
     Route::get('moderator/event/{eventId}/end', 'Moderator\\EventModerationController@endGame')->name('event.end');
+    Route::get('moderator/event/{eventId}/tiebreaker', 'Moderator\\EventModerationController@tiebreaker')->name('event.tiebreaker');
+    Route::get('moderator/event/{eventId}/tiebreaker/score', 'Moderator\\EventModerationController@getTiebreakerScore')->name('event.tiebreaker.score');
 });

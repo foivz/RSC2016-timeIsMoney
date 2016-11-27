@@ -26,4 +26,19 @@ class QuizCategoryEnum
                 return "Culture";
         }
     }
+
+    public static function getCategoryColor($categoryId) {
+        switch($categoryId) {
+            case static::QUIZ_TECH:
+                return "#3498db";
+            case static::QUIZ_HISTORY:
+                return "#e67e22";
+            case static::QUIZ_SPORT:
+                return "#34495e";
+            case static::QUIZ_ART:
+                return "#e74c3c";
+            case static::QUIZ_CULTURE:
+                return "#9b59b6";
+        }
+    }
 }

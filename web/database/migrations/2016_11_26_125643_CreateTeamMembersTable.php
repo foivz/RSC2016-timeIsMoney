@@ -17,6 +17,7 @@ class CreateTeamMembersTable extends Migration
             $table->integer('team_id');
             $table->integer('user_id');
             $table->integer('score')->default(0);
+            $table->integer('tiebreaker_score')->default(0);
             $table->timestamps();
         });
     }

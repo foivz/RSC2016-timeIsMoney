@@ -58,4 +58,9 @@ public interface RetrofitAPI {
     @POST("/api/answer")
     public Call<AnswerQuestionModel> answerQuestion(@Header("X-Authorization") String apyKey, @Field("team_id") int teamId,
             @Field("answer_id") int userId);
+
+    @FormUrlEncoded
+    @POST("/api/tiebreaker")
+    public Call<AnswerQuestionModel> tieBreaker(@Header("X-Authorization") String apyKey, @Field("team_id") int teamId,
+            @Field("score") int score);
 }

@@ -1,5 +1,11 @@
 package com.rsc.rschackathon.fragments;
 
+import com.rsc.rschackathon.R;
+import com.rsc.rschackathon.activities.CreateTeamActivity;
+import com.rsc.rschackathon.activities.MainActivity;
+import com.rsc.rschackathon.api.NetworkService;
+import com.rsc.rschackathon.api.models.AnswerQuestionModel;
+
 import android.app.Fragment;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -15,21 +21,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.rsc.rschackathon.R;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentQuestionSensor extends Fragment implements SensorEventListener {
 
     private SensorManager senSensorManager;
+
     private Sensor senAccelerometer;
 
     private long lastUpdate = 0;
+
     private float last_x, last_y, last_z;
 
     CountDownTimer viewCounter;
@@ -99,7 +107,7 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
             @Override
             public void onFinish() {
                 //TODO SEND TO SERVER
-                if(mPlayer.isPlaying()){
+                if (mPlayer.isPlaying()) {
                     mPlayer.stop();
                 }
                 shakeNow.setVisibility(View.VISIBLE);
@@ -107,6 +115,23 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
                 senSensorManager.unregisterListener(FragmentQuestionSensor.this);
                 introText.setText("Your result is");
                 shakeNow.setText(String.valueOf(totalShake));
+
+                NetworkService networkService = new NetworkService();
+                Call<AnswerQuestionModel> call = networkService.getAPI()
+                        .tieBreaker(MainActivity.API_KEY, CreateTeamActivity.TEAM_ID, Math.round(totalShake));
+                call.enqueue(new Callback<AnswerQuestionModel>() {
+                    @Override
+                    public void onResponse(Call<AnswerQuestionModel> call, Response<AnswerQuestionModel> response) {
+                        if (response.body() != null) {
+                            Log.i("TAG", "slanje tiebreakera uspjesno " + response.body().isSuccess());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<AnswerQuestionModel> call, Throwable t) {
+                        Log.i("TAG", t.getMessage());
+                    }
+                });
 
             }
         }.start();
@@ -116,7 +141,7 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         LayoutInflater lf = getActivity().getLayoutInflater();
         View view = lf.inflate(R.layout.fragment_question_sensor, container, false);
 
@@ -132,7 +157,7 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
         senSensorManager = (SensorManager) getActivity().getSystemService(getActivity().SENSOR_SERVICE);
         senAccelerometer = senSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
-        new Handler().postDelayed(new Runnable(){
+        new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 beginText.setVisibility(View.GONE);
@@ -187,7 +212,8 @@ public class FragmentQuestionSensor extends Fragment implements SensorEventListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if(mPlayer.isPlaying()){
+        if (mPlayer.isPlaying()) {
             mPlayer.stop();
-        }    }
+        }
+    }
 }

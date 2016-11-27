@@ -4,6 +4,7 @@ import com.rsc.rschackathon.R;
 import com.rsc.rschackathon.api.NetworkService;
 import com.rsc.rschackathon.api.models.Question;
 import com.rsc.rschackathon.api.models.QustionAPIModel;
+import com.rsc.rschackathon.fragments.FragmentQuestionSensor;
 import com.rsc.rschackathon.fragments.FragmentQuestionTypeOne;
 import com.rsc.rschackathon.fragments.FragmentQuestionTypeTwo;
 
@@ -23,12 +24,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.rsc.rschackathon.R;
-import com.rsc.rschackathon.api.NetworkService;
-import com.rsc.rschackathon.api.models.Question;
-import com.rsc.rschackathon.fragments.FragmentQuestionSensor;
-import com.rsc.rschackathon.fragments.FragmentQuestionTypeOne;
-import com.rsc.rschackathon.fragments.FragmentQuestionTypeTwo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -77,13 +72,14 @@ public class QuestionActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<QustionAPIModel> call, Response<QustionAPIModel> response) {
                         if (response.body() != null) {
+                            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                             if (response.body().getMessages().isEmpty()) {
 
                                 waitingText.setVisibility(View.GONE);
 
                                 if (typeId != (response.body().getData().getId())) {
                                     typeId = (response.body().getData().getId());
-                                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
                                     if (Integer.valueOf(response.body().getData().getType_id()) == 1) {
                                         FragmentQuestionTypeOne questionTypeOne = new FragmentQuestionTypeOne();
                                         final Bundle bundle = new Bundle();
@@ -132,6 +128,7 @@ public class QuestionActivity extends AppCompatActivity {
                                     handler.removeCallbacks(thread);
                                     try {
                                         thread.join();
+                                        fragmentTransaction.replace(R.id.fragment_container, new FragmentQuestionSensor()).commit();
                                     } catch (InterruptedException e) {
                                         e.printStackTrace();
                                     }

@@ -15,40 +15,47 @@
                                 <img src="{{ $question->image }}" />
                             @endif
                         </div>
-                        <div id="scoreboard"></div>
+                        <div>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Team name</th>
+                                        <th>Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scoreboard">
+
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>/*
-        function populateGroups()
+    <script>
+        function populateScoreboard()
         {
             $.ajax({
-                url: "{{ route('lobby.teams', ['eventId' => $event->id]) }}",
+                url: "{{ route('event.score', ['eventId' => $event->id]) }}",
                 dataType: 'json',
                 type: 'GET',
                 success: function(raw) {
                     var content = "";
                     $.each(raw.data, function (key, team) {
-                        var style = "";
-                        if(team.members.length == {{ $event->team_members }}) {
-                            style = ' style="background-color: #b4d690"';
-                        }
-                        content += '<div class="well"'+style+'><div style="font-size: 2em;"><b>Team name: </b>' + team.team_name + '</div>';
-                        $.each(team.members, function (key, member) {
-                            content += '<div style="text-align: center; display: inline-block;"><img src="' + member.avatar_url + '"/><p>'+ member.name +'</p></div>';
-                        });
-                        content += '</div>';
+                        content += '<tr><td>'+key+'</td><td>'+team.team_name+'</td><td>'+team.score_sum+'</td></tr>';
+                        console.log(content);
                     });
-                    $('#groups').html(content);
+                    console.log(content);
+                    $('#scoreboard').html(content);
                 }
             });
         }
 
         $(document).ready(function() {
-            setInterval(populateGroups, 500);
-        });*/
+            setInterval(populateScoreboard, 1000);
+        });
     </script>
 @endsection

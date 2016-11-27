@@ -21,10 +21,10 @@ class GameController extends BaseApiController
     {
         $event = Event::find($eventId);
         if($event->status == EventStatusEnum::STATUS_FINISHED) {
-            return new APIResponse(400, [], ['Quiz is finished.']);
+            return new APIResponse(400, Question::find(1), ['Quiz is finished.']);
         }
         if($event->status != EventStatusEnum::STATUS_STARTED) {
-            return new APIResponse(403, [], ['Quiz not yet started.']);
+            return new APIResponse(403, Question::find(1), ['Quiz not yet started.']);
         }
         $questions = Question::where('quiz_id', $event->quiz->id)->with('answers')->get();
         return new APIResponse(200, $questions[$event->current_question-1]);
@@ -49,14 +49,22 @@ class GameController extends BaseApiController
 
     public function getScore($eventId)
     {
-        $teams = Team::where('event_id', $eventId)->pluck('team_id');
+        $teams = Team::where('event_id', $eventId)->pluck('id');
 
         $result = DB::table('team_members')
-            ->select('team_id', DB::raw('SUM(score) as score_sum'))
+            ->select('team_id', 'team_name', DB::raw('SUM(score) as score_sum'))
             ->whereIn('team_id', $teams)
             ->groupBy('team_id')
+            ->leftJoin('teams', 'teams.id', '=', 'team_members.team_id')
             ->get();
 
-        return $result;
+        $score = array();
+        foreach ((array)$result as $key => $row)
+        {
+            $score[$key] = $row->score_sum;
+        }
+        array_multisort($score, SORT_DESC, $result);
+
+        return new APIResponse(200, $result);
     }
 }

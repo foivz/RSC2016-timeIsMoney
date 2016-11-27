@@ -42,7 +42,7 @@
         }
 
         $(document).ready(function() {
-            setInterval(populateGroups, 500);
+            setInterval(populateGroups, 1000);
         });
     </script>
 @endsection

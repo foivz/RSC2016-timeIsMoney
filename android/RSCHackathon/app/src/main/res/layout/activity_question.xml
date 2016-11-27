@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_question"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.rsc.rschackathon.activities.QuestionActivity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/activity_question"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="com.rsc.rschackathon.activities.QuestionActivity">
 
     <FrameLayout
-        android:id="@+id/fragment_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+        <TextView
+                android:id="@+id/waiting_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|center_horizontal"
+                android:text="Waiting for quizz to start"
+                android:textSize="20sp"/>
     </FrameLayout>
 
 </RelativeLayout>

@@ -80,19 +80,6 @@
             tools:text="B" />
 
         <Button
-            android:id="@+id/button_d"
-            android:layout_width="145dp"
-            android:layout_height="60dp"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/round_button_question_blue"
-            android:paddingLeft="15dp"
-            android:textAlignment="viewStart"
-            android:textColor="#2196f3"
-            tools:text="D" />
-
-        <Button
             android:id="@+id/button_c2"
             android:layout_width="145dp"
             android:layout_height="60dp"
@@ -103,6 +90,19 @@
             android:textColor="#2196f3"
             android:layout_centerHorizontal="true"
             tools:text="C" />
+
+        <Button
+                android:id="@+id/button_d"
+                android:layout_width="145dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/round_button_question_blue"
+                android:paddingLeft="15dp"
+                android:textAlignment="viewStart"
+                android:textColor="#2196f3"
+                tools:text="D"
+                android:layout_alignParentBottom="true"
+                android:layout_alignStart="@+id/button_b"/>
 
 
     </RelativeLayout>

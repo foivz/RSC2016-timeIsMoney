@@ -121,6 +121,7 @@ public class TeamActivity extends AppCompatActivity
                     NdefRecord NdefRecord_0 = inNdefRecords[0];
                     final String inMsg = new String(NdefRecord_0.getPayload());
                     Log.i("TAG", inMsg);
+                    CreateTeamActivity.TEAM_ID = Integer.parseInt(inMsg);
                     //teamMateovi.add(inMsg);
                     //recyclerViewAdapter.setData(teamMateovi);
                     //textInfo.setText(inMsg);

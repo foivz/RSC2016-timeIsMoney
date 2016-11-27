@@ -1,9 +1,18 @@
 package com.rsc.rschackathon.fragments;
 
+import com.rsc.rschackathon.R;
+import com.rsc.rschackathon.activities.CreateTeamActivity;
+import com.rsc.rschackathon.activities.MainActivity;
+import com.rsc.rschackathon.activities.QuestionActivity;
+import com.rsc.rschackathon.api.NetworkService;
+import com.rsc.rschackathon.api.models.AnswerQuestionModel;
+import com.rsc.rschackathon.api.models.Question;
+import com.squareup.picasso.Picasso;
+
 import android.app.Fragment;
-import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +20,11 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.rsc.rschackathon.R;
-import com.rsc.rschackathon.activities.QuestionActivity;
-import com.rsc.rschackathon.api.models.Question;
-import com.squareup.picasso.Picasso;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class FragmentQuestionTypeOne extends Fragment {
 
@@ -49,15 +56,17 @@ public class FragmentQuestionTypeOne extends Fragment {
     @BindView(R.id.button_c2)
     Button buttonC2;
 
+    private NetworkService networkService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         LayoutInflater lf = getActivity().getLayoutInflater();
         View view = lf.inflate(R.layout.fragment_question_type_one, container, false);
 
         ButterKnife.bind(this, view);
 
+        networkService = new NetworkService();
         final Bundle arguments = this.getArguments();
         if (arguments != null) {
             question = arguments.getParcelable(QuestionActivity.QUESTION_DETAILS);
@@ -65,22 +74,20 @@ public class FragmentQuestionTypeOne extends Fragment {
             if (!TextUtils.isEmpty(question.getImage())) {
                 Picasso.with(getActivity()).load(question.getImage()).into(questionImage);
             }
-            if(question.getAnswers().size() == 4) {
+            if (question.getAnswers().size() == 4) {
                 buttonA.setText("A. " + question.getAnswers().get(0).getPayload());
                 buttonB.setText("B. " + question.getAnswers().get(1).getPayload());
                 buttonC.setText("C. " + question.getAnswers().get(2).getPayload());
                 buttonD.setText("D. " + question.getAnswers().get(3).getPayload());
                 buttonC2.setVisibility(View.GONE);
 
-            }
-            else if(question.getAnswers().size() == 2){
+            } else if (question.getAnswers().size() == 2) {
                 buttonA.setText("A. " + question.getAnswers().get(0).getPayload());
                 buttonB.setText("B. " + question.getAnswers().get(1).getPayload());
                 buttonC.setVisibility(View.GONE);
                 buttonD.setVisibility(View.GONE);
                 buttonC2.setVisibility(View.GONE);
-            }
-            else if(question.getAnswers().size() == 3){
+            } else if (question.getAnswers().size() == 3) {
                 buttonA.setText("A. " + question.getAnswers().get(0).getPayload());
                 buttonB.setText("B. " + question.getAnswers().get(1).getPayload());
                 buttonC2.setText("C. " + question.getAnswers().get(2).getPayload());
@@ -93,7 +100,7 @@ public class FragmentQuestionTypeOne extends Fragment {
         return view;
     }
 
-    private void setDisable(){
+    private void setDisable() {
         buttonA.setEnabled(false);
         buttonB.setEnabled(false);
         buttonC.setEnabled(false);
@@ -101,15 +108,33 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonC2.setEnabled(false);
     }
 
-    private void setOnClickListeners(){
+    private void answerQuestion(int id) {
+        Call<AnswerQuestionModel> call = networkService.getAPI()
+                .answerQuestion(MainActivity.API_KEY, CreateTeamActivity.TEAM_ID, id);
+        call.enqueue(new Callback<AnswerQuestionModel>() {
+            @Override
+            public void onResponse(Call<AnswerQuestionModel> call, Response<AnswerQuestionModel> response) {
+                Log.i("TAG", "question is " + response.body().isSuccess());
+            }
+
+            @Override
+            public void onFailure(Call<AnswerQuestionModel> call, Throwable t) {
+                Log.i("TAG", t.getMessage());
+            }
+        });
+
+    }
+
+    private void setOnClickListeners() {
         buttonA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(0).getCorrect() == 1){
+                answerQuestion(question.getAnswers().get(0).getId());
+
+                if (question.getAnswers().get(0).getCorrect() == 1) {
                     buttonA.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
                     buttonA.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                } else {
                     buttonA.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
                     buttonA.setTextColor(getResources().getColor(R.color.white));
                 }
@@ -119,11 +144,12 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(1).getCorrect() == 1){
+                answerQuestion(question.getAnswers().get(1).getId());
+
+                if (question.getAnswers().get(1).getCorrect() == 1) {
                     buttonB.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
                     buttonB.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                } else {
                     buttonB.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
                     buttonB.setTextColor(getResources().getColor(R.color.white));
                 }
@@ -133,13 +159,14 @@ public class FragmentQuestionTypeOne extends Fragment {
 
         });
         buttonC.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(2).getCorrect() == 1){
+                answerQuestion(question.getAnswers().get(2).getId());
+                if (question.getAnswers().get(2).getCorrect() == 1) {
                     buttonC.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
                     buttonC.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                } else {
                     buttonC.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
                     buttonC.setTextColor(getResources().getColor(R.color.white));
                 }
@@ -151,11 +178,11 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(3).getCorrect() == 1){
+                answerQuestion(question.getAnswers().get(3).getId());
+                if (question.getAnswers().get(3).getCorrect() == 1) {
                     buttonD.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
                     buttonD.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                } else {
                     buttonD.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
                     buttonD.setTextColor(getResources().getColor(R.color.white));
                 }
@@ -167,11 +194,12 @@ public class FragmentQuestionTypeOne extends Fragment {
         buttonC2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (question.getAnswers().get(2).getCorrect() == 1){
+
+                answerQuestion(question.getAnswers().get(2).getId());
+                if (question.getAnswers().get(2).getCorrect() == 1) {
                     buttonC2.setBackground(getResources().getDrawable(R.drawable.round_button_question_green));
                     buttonC2.setTextColor(getResources().getColor(R.color.white));
-                }
-                else{
+                } else {
                     buttonC2.setBackground(getResources().getDrawable(R.drawable.round_button_question_red));
                     buttonC2.setTextColor(getResources().getColor(R.color.white));
                 }

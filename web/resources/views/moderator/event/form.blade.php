@@ -1,14 +1,20 @@
 <div class="form-group {{ $errors->has('status') ? 'has-error' : ''}}">
     {!! Form::label('status', 'Status', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::number('status', null, ['class' => 'form-control']) !!}
+        {!! Form::select('status', [    0 => 'Unpublished',
+    1 => 'Scheduled',
+    2 => 'Open',
+    3 => 'Closed',
+    4 => 'Started',
+    5 => 'Finished',
+], $event->status, ['class' => 'form-control']) !!}
         {!! $errors->first('status', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
     {!! Form::label('name', 'Name', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('name', null, ['class' => 'form-control']) !!}
+        {!! Form::input('text', 'name', null, ['class' => 'form-control']) !!}
         {!! $errors->first('name', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
@@ -22,7 +28,7 @@
 <div class="form-group {{ $errors->has('location') ? 'has-error' : ''}}">
     {!! Form::label('location', 'Location', ['class' => 'col-md-4 control-label']) !!}
     <div class="col-md-6">
-        {!! Form::textarea('location', null, ['class' => 'form-control']) !!}
+        {!! Form::input('text', 'location', null, ['class' => 'form-control']) !!}
         {!! $errors->first('location', '<p class="help-block">:message</p>') !!}
     </div>
 </div>

@@ -125,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
                             ID = response.body().getData().getId();
                             Log.i("TAG", "on response " + APIKEY);
                             startActivity(new Intent(MainActivity.this, RecyclerViewActivity.class));
+                            finish();
 
                             /*
                             writeTokenToSharedPreferences(response.body().getData().getApiKey());
@@ -243,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
                                 API_KEY =  response.body().getData().getApi_key();
                                 ID = response.body().getData().getId();
                                 mainActivity.startActivity(new Intent(mainActivity.getApplicationContext(), RecyclerViewActivity.class));
+                                mainActivity.finish();
                                 /*mainActivity.writeTokenToSharedPreferences(response.body().getData().getApiKey());
                                 Call<User> userCall = mainActivity.networkService.getAPI().getUser(response.body().getData().getApiKey());
                                 userCall.enqueue(new Callback<User>() {
